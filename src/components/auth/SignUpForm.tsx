@@ -25,11 +25,14 @@ export function SignUpForm() {
     setSuccess('')
 
     try {
-      const { error } = await signUp(email, password, name, gender || undefined)
+      console.log('Attempting to sign up with:', { email, name, gender })
+      const { data, error } = await signUp(email, password, name, gender || undefined)
       
       if (error) {
+        console.error('Sign up error:', error)
         setError(error.message)
       } else {
+        console.log('Sign up successful:', data)
         setSuccess('Check your email for the confirmation link!')
         setEmail('')
         setPassword('')
@@ -37,7 +40,8 @@ export function SignUpForm() {
         setGender('')
       }
     } catch (err) {
-      setError('An unexpected error occurred')
+      console.error('Unexpected error during sign up:', err)
+      setError('An unexpected error occurred. Please check your internet connection and try again.')
     } finally {
       setLoading(false)
     }
