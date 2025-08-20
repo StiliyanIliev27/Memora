@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { useAuthContext } from '@/stores/AuthContext'
 import Link from 'next/link'
-import { MapPin, Heart, Users, Camera, Globe, Star, Sparkles } from 'lucide-react'
+import { MapPin, Heart, Users, Camera, Globe, Star, Sparkles, ArrowRight, ChevronRight } from 'lucide-react'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 
@@ -90,133 +90,187 @@ export default function Home() {
         <div className="min-h-screen flex flex-col">
           <Header />
           <main className="flex-1">
-            {/* Hero Section - Mapbox Style */}
-            <section className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 py-32 overflow-hidden">
-              {/* Background Pattern */}
-              <div className="absolute inset-0 opacity-20">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.1)_1px,transparent_0)] bg-[length:20px_20px]"></div>
-              </div>
+            {/* Hero Section - Sophisticated Design */}
+            <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+              {/* Animated Background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100"></div>
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1)_0%,transparent_50%)]"></div>
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(147,51,234,0.1)_0%,transparent_50%)]"></div>
+              
+              {/* Floating Elements */}
+              <div className="absolute top-20 left-10 w-32 h-32 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+              <div className="absolute top-40 right-10 w-32 h-32 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+              <div className="absolute -bottom-8 left-20 w-32 h-32 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
               
               <div className="container mx-auto px-4 relative z-10">
-                <div className="text-center max-w-4xl mx-auto">
-                  <div className="mb-8">
-                    <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mb-8 shadow-2xl">
-                      <MapPin className="h-12 w-12 text-white" />
+                <div className="text-center max-w-5xl mx-auto">
+                  {/* Logo/Brand */}
+                  <div className="mb-12">
+                    <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl mb-8 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500">
+                      <MapPin className="h-10 w-10 text-white" />
                     </div>
                   </div>
                   
-                  <h1 className="text-7xl font-bold text-white mb-8 leading-tight">
-                    Maps that do more
+                  {/* Main Headline */}
+                  <h1 className="text-6xl md:text-8xl font-black text-gray-900 mb-8 leading-tight">
+                    <span className="block">Capture</span>
+                    <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+                      Every Moment
+                    </span>
                   </h1>
-                  <p className="text-2xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed">
-                    The location platform for sharing memories, connecting with loved ones, and exploring the world together
+                  
+                  {/* Subtitle */}
+                  <p className="text-xl md:text-2xl text-gray-600 mb-16 max-w-4xl mx-auto leading-relaxed font-light">
+                    Transform your memories into an interactive world map. Share experiences, 
+                    connect with loved ones, and create lasting stories across the globe.
                   </p>
                   
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  {/* CTA Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20">
                     <Link href="/signup">
-                      <Button size="lg" className="text-lg px-12 py-6 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 shadow-2xl rounded-xl font-semibold">
-                        Get started for free
+                      <Button size="lg" className="group relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-6 text-lg font-semibold rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-1">
+                        <span className="relative z-10">Start Your Journey</span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
                       </Button>
                     </Link>
                     <Link href="/signin">
-                      <Button variant="outline" size="lg" className="text-lg px-12 py-6 border-2 border-white/30 text-white hover:bg-white/10 rounded-xl font-semibold">
-                        Contact us
+                      <Button variant="outline" size="lg" className="px-12 py-6 text-lg font-semibold rounded-2xl border-2 border-gray-300 hover:border-gray-400 bg-white/80 backdrop-blur-sm text-gray-700 hover:text-gray-900 hover:bg-white transition-all duration-300 transform hover:-translate-y-1 shadow-lg">
+                        Sign In
+                        <ChevronRight className="ml-2 h-5 w-5" />
                       </Button>
                     </Link>
+                  </div>
+                  
+                  {/* Trust Indicators */}
+                  <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-gray-500">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <span>10,000+ Active Users</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                      <span>150+ Countries</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                      <span>Secure & Private</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </section>
 
-            {/* Features Grid - Pin Traveler Style */}
-            <section className="py-32 bg-white">
+            {/* Features Section - Elegant Grid */}
+            <section className="py-32 bg-white relative">
               <div className="container mx-auto px-4">
                 <div className="text-center mb-20">
-                  <h2 className="text-5xl font-bold text-gray-900 mb-6">
-                    Bring location to life with beautiful memories
+                  <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                    Why Choose <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Memora</span>?
                   </h2>
-                  <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Use Memora's interactive maps, ready-made templates, and live updating features to build customizable memory maps for web and mobile.
+                  <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Experience the perfect blend of technology and emotion. 
+                    Create, share, and relive your most precious moments.
                   </p>
                 </div>
                 
-                <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
+                <div className="grid lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
                   {/* Interactive Maps */}
-                  <div className="group">
-                    <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-2xl mb-6 group-hover:shadow-xl transition-all duration-300">
-                      <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-xl mb-6">
-                        <MapPin className="h-8 w-8 text-white" />
-                      </div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-4">Interactive Memory Maps</h3>
-                      <p className="text-gray-600 leading-relaxed mb-6">
-                        Create beautiful, interactive maps where you can pin your memories with photos, videos, and stories. 
-                        Customize your map with different styles and share with loved ones.
-                      </p>
-                      <div className="flex items-center text-blue-600 font-semibold group-hover:text-blue-700 transition-colors">
-                        Explore Maps
-                        <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
+                  <div className="group relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
+                    <div className="relative bg-white p-10 rounded-3xl shadow-xl border border-gray-100 group-hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2">
+                      <div className="flex items-start gap-6">
+                        <div className="flex-shrink-0">
+                          <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            <MapPin className="h-8 w-8 text-white" />
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-2xl font-bold text-gray-900 mb-4">Interactive Memory Maps</h3>
+                          <p className="text-gray-600 leading-relaxed mb-6">
+                            Pin your memories to beautiful, interactive maps. Customize styles, 
+                            add photos and videos, and create your personal world story.
+                          </p>
+                          <div className="flex items-center text-blue-600 font-semibold group-hover:text-blue-700 transition-colors">
+                            Explore Maps
+                            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
 
                   {/* Memory Sharing */}
-                  <div className="group">
-                    <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-2xl mb-6 group-hover:shadow-xl transition-all duration-300">
-                      <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-600 rounded-xl mb-6">
-                        <Heart className="h-8 w-8 text-white" />
-                      </div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-4">Share Memories Together</h3>
-                      <p className="text-gray-600 leading-relaxed mb-6">
-                        Connect with partners, friends, and groups to create shared memory collections. 
-                        Everyone can contribute photos and stories to build a collective journey.
-                      </p>
-                      <div className="flex items-center text-purple-600 font-semibold group-hover:text-purple-700 transition-colors">
-                        Learn More
-                        <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
+                  <div className="group relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
+                    <div className="relative bg-white p-10 rounded-3xl shadow-xl border border-gray-100 group-hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2">
+                      <div className="flex items-start gap-6">
+                        <div className="flex-shrink-0">
+                          <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            <Heart className="h-8 w-8 text-white" />
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-2xl font-bold text-gray-900 mb-4">Share Together</h3>
+                          <p className="text-gray-600 leading-relaxed mb-6">
+                            Connect with partners, friends, and groups. Create shared collections 
+                            where everyone contributes to building beautiful memories.
+                          </p>
+                          <div className="flex items-center text-purple-600 font-semibold group-hover:text-purple-700 transition-colors">
+                            Learn More
+                            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
 
                   {/* Global Connections */}
-                  <div className="group">
-                    <div className="bg-gradient-to-br from-green-50 to-blue-50 p-8 rounded-2xl mb-6 group-hover:shadow-xl transition-all duration-300">
-                      <div className="inline-flex items-center justify-center w-16 h-16 bg-green-600 rounded-xl mb-6">
-                        <Users className="h-8 w-8 text-white" />
-                      </div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-4">Global Connections</h3>
-                      <p className="text-gray-600 leading-relaxed mb-6">
-                        Build meaningful connections across the globe. Whether it's couples, friends, or groups, 
-                        create lasting bonds through shared experiences and memories.
-                      </p>
-                      <div className="flex items-center text-green-600 font-semibold group-hover:text-green-700 transition-colors">
-                        Discover Connections
-                        <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
+                  <div className="group relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-blue-600 rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
+                    <div className="relative bg-white p-10 rounded-3xl shadow-xl border border-gray-100 group-hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2">
+                      <div className="flex items-start gap-6">
+                        <div className="flex-shrink-0">
+                          <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            <Users className="h-8 w-8 text-white" />
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-2xl font-bold text-gray-900 mb-4">Global Connections</h3>
+                          <p className="text-gray-600 leading-relaxed mb-6">
+                            Build meaningful relationships across continents. Whether couples, 
+                            friends, or groups, create lasting bonds through shared experiences.
+                          </p>
+                          <div className="flex items-center text-green-600 font-semibold group-hover:text-green-700 transition-colors">
+                            Discover Connections
+                            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Smart Search */}
-                  <div className="group">
-                    <div className="bg-gradient-to-br from-orange-50 to-red-50 p-8 rounded-2xl mb-6 group-hover:shadow-xl transition-all duration-300">
-                      <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-600 rounded-xl mb-6">
-                        <Camera className="h-8 w-8 text-white" />
-                      </div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-4">Smart Memory Capture</h3>
-                      <p className="text-gray-600 leading-relaxed mb-6">
-                        Easily capture and organize your memories with intelligent features. 
-                        Upload photos, videos, and notes, then let Memora help you organize them beautifully.
-                      </p>
-                      <div className="flex items-center text-orange-600 font-semibold group-hover:text-orange-700 transition-colors">
-                        Start Capturing
-                        <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
+                  {/* Smart Capture */}
+                  <div className="group relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
+                    <div className="relative bg-white p-10 rounded-3xl shadow-xl border border-gray-100 group-hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2">
+                      <div className="flex items-start gap-6">
+                        <div className="flex-shrink-0">
+                          <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            <Camera className="h-8 w-8 text-white" />
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-2xl font-bold text-gray-900 mb-4">Smart Memory Capture</h3>
+                          <p className="text-gray-600 leading-relaxed mb-6">
+                            Effortlessly capture and organize your memories. Upload photos, 
+                            videos, and notes with intelligent organization features.
+                          </p>
+                          <div className="flex items-center text-orange-600 font-semibold group-hover:text-orange-700 transition-colors">
+                            Start Capturing
+                            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -224,55 +278,73 @@ export default function Home() {
               </div>
             </section>
 
-            {/* Social Proof Section */}
-            <section className="py-24 bg-gray-50">
-              <div className="container mx-auto px-4">
-                <div className="text-center mb-16">
-                  <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                    Trusted by memory makers worldwide
+            {/* Social Proof Section - Elegant Stats */}
+            <section className="py-32 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.05)_0%,transparent_50%)]"></div>
+              <div className="container mx-auto px-4 relative z-10">
+                <div className="text-center mb-20">
+                  <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    Trusted by Memory Makers Worldwide
                   </h2>
-                  <p className="text-xl text-gray-600">
-                    Join thousands of people who are already sharing their memories and exploring the world together
+                  <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Join a global community of people who believe in preserving and sharing life's precious moments.
                   </p>
                 </div>
                 
-                <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-                  <div className="text-center p-6">
-                    <div className="text-4xl font-bold text-blue-600 mb-2">10K+</div>
-                    <div className="text-gray-600">Active Users</div>
+                <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
+                  <div className="text-center group">
+                    <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 group-hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1">
+                      <div className="text-5xl font-black bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-4">10K+</div>
+                      <div className="text-gray-600 font-medium">Active Users</div>
+                      <div className="text-sm text-gray-500 mt-2">Creating memories daily</div>
+                    </div>
                   </div>
-                  <div className="text-center p-6">
-                    <div className="text-4xl font-bold text-purple-600 mb-2">50K+</div>
-                    <div className="text-gray-600">Memories Shared</div>
+                  <div className="text-center group">
+                    <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 group-hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1">
+                      <div className="text-5xl font-black bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text text-transparent mb-4">50K+</div>
+                      <div className="text-gray-600 font-medium">Memories Shared</div>
+                      <div className="text-sm text-gray-500 mt-2">Stories worth telling</div>
+                    </div>
                   </div>
-                  <div className="text-center p-6">
-                    <div className="text-4xl font-bold text-green-600 mb-2">150+</div>
-                    <div className="text-gray-600">Countries Explored</div>
+                  <div className="text-center group">
+                    <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 group-hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1">
+                      <div className="text-5xl font-black bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent mb-4">150+</div>
+                      <div className="text-gray-600 font-medium">Countries Explored</div>
+                      <div className="text-sm text-gray-500 mt-2">Global adventures</div>
+                    </div>
                   </div>
                 </div>
               </div>
             </section>
 
-            {/* CTA Section - Mapbox Style */}
-            <section className="py-32 bg-gradient-to-r from-slate-900 to-blue-900">
-              <div className="container mx-auto px-4 text-center">
-                <h2 className="text-5xl font-bold text-white mb-8">
-                  Ready to get started?
-                </h2>
-                <p className="text-xl text-blue-100 mb-12 max-w-2xl mx-auto">
-                  Create an account or talk to one of our experts about building your perfect memory map.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link href="/signup">
-                    <Button size="lg" className="text-lg px-12 py-6 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 shadow-2xl rounded-xl font-semibold">
-                      Sign up for free
-                    </Button>
-                  </Link>
-                  <Link href="/signin">
-                    <Button variant="outline" size="lg" className="text-lg px-12 py-6 border-2 border-white/30 text-white hover:bg-white/10 rounded-xl font-semibold">
-                      Contact us
-                    </Button>
-                  </Link>
+            {/* Final CTA Section - Sophisticated */}
+            <section className="py-32 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(59,130,246,0.2)_0%,transparent_50%)]"></div>
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(147,51,234,0.2)_0%,transparent_50%)]"></div>
+              
+              <div className="container mx-auto px-4 relative z-10">
+                <div className="text-center max-w-4xl mx-auto">
+                  <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
+                    Ready to Begin Your Story?
+                  </h2>
+                  <p className="text-xl text-blue-100 mb-12 max-w-2xl mx-auto leading-relaxed">
+                    Join thousands of people who are already creating, sharing, and preserving 
+                    their most precious memories with Memora.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-6 justify-center">
+                    <Link href="/signup">
+                      <Button size="lg" className="group relative overflow-hidden bg-white text-gray-900 hover:bg-gray-100 px-12 py-6 text-lg font-semibold rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-1">
+                        <span className="relative z-10">Create Your First Memory</span>
+                        <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+                      </Button>
+                    </Link>
+                    <Link href="/signin">
+                      <Button variant="outline" size="lg" className="px-12 py-6 text-lg font-semibold rounded-2xl border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm transition-all duration-300 transform hover:-translate-y-1">
+                        Sign In to Continue
+                        <ChevronRight className="ml-2 h-5 w-5" />
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </section>
