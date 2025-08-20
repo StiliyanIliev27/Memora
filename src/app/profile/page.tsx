@@ -1,5 +1,4 @@
 import { ProfileForm } from '@/components/user/ProfileForm'
-import { DatabaseTest } from '@/components/debug/DatabaseTest'
 
 export default function ProfilePage() {
   return (
@@ -12,7 +11,6 @@ export default function ProfilePage() {
           </p>
         </div>
         
-        <DatabaseTest />
         <ProfileForm />
       </div>
     </div>
