@@ -29,9 +29,29 @@ export function ProfileForm() {
       const userProfile = await databaseService.getCurrentUser()
       if (userProfile) {
         setProfile(userProfile)
+      } else {
+        // Fallback to auth user data if database profile doesn't exist
+        if (user) {
+          setProfile({
+            id: user.id,
+            email: user.email || '',
+            name: user.user_metadata?.name || 'User',
+            gender: user.user_metadata?.gender || undefined
+          })
+        }
       }
     } catch (err) {
-      setError('Failed to load profile')
+      // Fallback to auth user data if database fails
+      if (user) {
+        setProfile({
+          id: user.id,
+          email: user.email || '',
+          name: user.user_metadata?.name || 'User',
+          gender: user.user_metadata?.gender || undefined
+        })
+      } else {
+        setError('Failed to load profile')
+      }
     } finally {
       setLoading(false)
     }
@@ -49,10 +69,12 @@ export function ProfileForm() {
         setProfile(updatedProfile)
         setSuccess('Profile updated successfully!')
       } else {
-        setError('Failed to update profile')
+        // If update fails, it might be because the profile doesn't exist yet
+        // This could happen if the database migrations haven't been run
+        setError('Database not ready. Please run the migrations first.')
       }
     } catch (err) {
-      setError('An error occurred while updating your profile')
+      setError('An error occurred while updating your profile. Make sure the database is set up correctly.')
     } finally {
       setSaving(false)
     }
