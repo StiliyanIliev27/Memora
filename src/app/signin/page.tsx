@@ -1,4 +1,5 @@
 import { SignInForm } from '@/components/auth/SignInForm'
+import { EnvChecker } from '@/components/debug/EnvChecker'
 import Link from 'next/link'
 
 export default function SignInPage() {
@@ -12,6 +13,7 @@ export default function SignInPage() {
           </p>
         </div>
         
+        <EnvChecker />
         <SignInForm />
         
         <div className="text-center">

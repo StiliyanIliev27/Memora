@@ -17,20 +17,43 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
 - The anon key should be a long string starting with `eyJ...`
 - Make sure there are no extra spaces or quotes around the values
 
-### 2. Verify Supabase Project Settings
+### 2. Fix CORS Redirect Error
+
+**If you see this error:**
+```
+Access to fetch at 'https://supabase.com/dashboard/project/...' has been blocked by CORS policy
+```
+
+**The Problem:** You're using the Supabase dashboard URL instead of the project API URL.
+
+**Solution:** 
+1. Go to your Supabase dashboard
+2. Navigate to Settings > API
+3. Copy the **"Project URL"** (not the dashboard URL)
+4. The correct format is: `https://your-project-id.supabase.co`
+
+**Wrong URL Examples:**
+- ❌ `https://supabase.com/dashboard/project/...`
+- ❌ `https://app.supabase.com/project/...`
+
+**Correct URL Examples:**
+- ✅ `https://kckgcwgzsfwvyqqtnfas.supabase.co`
+- ✅ `https://my-project.supabase.co`
+
+### 3. Verify Supabase Project Settings
 
 1. Go to your Supabase dashboard
 2. Navigate to Settings > API
 3. Copy the "Project URL" and "anon public" key
 4. Make sure these match your `.env.local` file
 
-### 3. Check Supabase Authentication Settings
+### 4. Check Supabase Authentication Settings
 
 1. Go to Authentication > Settings in your Supabase dashboard
 2. Make sure "Enable email confirmations" is configured as needed
 3. Check that your site URL is added to the allowed redirect URLs
 
-### 4. Common Issues and Solutions
+### 5. Common Issues and Solutions
 
 #### Issue: Environment variables not loading
 **Solution:** Restart your development server after adding `.env.local`
@@ -46,14 +69,14 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
 #### Issue: Invalid API key
 **Solution:** Regenerate your API keys in Supabase dashboard
 
-### 5. Debug Steps
+### 6. Debug Steps
 
 1. **Check the browser console** for detailed error messages
 2. **Use the EnvChecker component** on the signup page to verify configuration
 3. **Test the connection** by visiting your Supabase project URL
 4. **Check network tab** in browser dev tools for failed requests
 
-### 6. Testing Your Setup
+### 7. Testing Your Setup
 
 1. Start the development server: `npm run dev`
 2. Visit `http://localhost:3000/signup`
@@ -61,7 +84,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
 4. Try to sign up with a test email
 5. Check browser console for any error messages
 
-### 7. Still Having Issues?
+### 8. Still Having Issues?
 
 If you're still experiencing problems:
 
@@ -70,7 +93,7 @@ If you're still experiencing problems:
 3. **Check Billing**: Ensure your project hasn't been paused due to billing
 4. **Contact Support**: Use the Supabase Discord or GitHub issues
 
-### 8. Quick Fix Commands
+### 9. Quick Fix Commands
 
 ```bash
 # Restart development server

@@ -12,6 +12,7 @@ export function SignInForm() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
 
   const { signIn } = useAuthContext()
 
@@ -19,15 +20,23 @@ export function SignInForm() {
     e.preventDefault()
     setLoading(true)
     setError('')
+    setSuccess('')
 
     try {
-      const { error } = await signIn(email, password)
+      console.log('Attempting to sign in with:', { email })
+      const { data, error } = await signIn(email, password)
       
       if (error) {
+        console.error('Sign in error:', error)
         setError(error.message)
+      } else {
+        console.log('Sign in successful:', data)
+        setSuccess('Sign in successful! Redirecting...')
+        // The user will be automatically redirected by the auth context
       }
     } catch (err) {
-      setError('An unexpected error occurred')
+      console.error('Unexpected error during sign in:', err)
+      setError('An unexpected error occurred. Please check your internet connection and try again.')
     } finally {
       setLoading(false)
     }
@@ -70,6 +79,12 @@ export function SignInForm() {
           {error && (
             <div className="text-sm text-red-600 bg-red-50 p-3 rounded-md">
               {error}
+            </div>
+          )}
+
+          {success && (
+            <div className="text-sm text-green-600 bg-green-50 p-3 rounded-md">
+              {success}
             </div>
           )}
 
