@@ -92,14 +92,14 @@ export function ProfileForm() {
   }
 
   return (
-    <Card className="w-full max-w-md mx-auto shadow-xl border-0 bg-white/80 backdrop-blur-sm">
-      <CardHeader className="text-center">
-        <CardTitle className="text-2xl">Profile</CardTitle>
-        <CardDescription className="text-base">
+    <div className="w-full">
+      <div className="text-center mb-6">
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">Profile</h2>
+        <p className="text-gray-600">
           Update your profile information
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
+        </p>
+      </div>
+      <div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="name">Full Name</Label>
@@ -155,9 +155,9 @@ export function ProfileForm() {
 
           <Button type="submit" className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700" disabled={saving}>
             {saving ? 'Saving...' : 'Save Changes'}
-          </Button>
-        </form>
-      </CardContent>
-    </Card>
+                  </Button>
+      </form>
+    </div>
+  </div>
   )
 }

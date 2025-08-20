@@ -1,30 +1,59 @@
 import { SignInForm } from '@/components/auth/SignInForm'
 import Link from 'next/link'
-import { MapPin } from 'lucide-react'
+import { MapPin, ArrowRight, ChevronRight } from 'lucide-react'
 
 export default function SignInPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div className="text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-6">
-            <MapPin className="h-8 w-8 text-white" />
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1)_0%,transparent_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(147,51,234,0.1)_0%,transparent_50%)]"></div>
+      
+      {/* Floating Elements */}
+      <div className="absolute top-20 left-10 w-32 h-32 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+      <div className="absolute top-40 right-10 w-32 h-32 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+      <div className="absolute -bottom-8 left-20 w-32 h-32 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+      
+      <div className="relative z-10 w-full max-w-md mx-auto px-4">
+        <div className="text-center mb-12">
+          {/* Logo/Brand */}
+          <div className="mb-8">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl mb-6 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500">
+              <MapPin className="h-10 w-10 text-white" />
+            </div>
           </div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Welcome Back</h1>
-          <p className="mt-2 text-lg text-gray-600">
-            Sign in to continue sharing your memories
+          
+          {/* Main Headline */}
+          <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
+            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+              Welcome Back
+            </span>
+          </h1>
+          <p className="text-lg text-gray-600 max-w-sm mx-auto leading-relaxed font-light">
+            Sign in to continue sharing your memories and exploring the world together
           </p>
         </div>
         
-        <SignInForm />
+        {/* Sign In Form */}
+        <div className="bg-white/80 backdrop-blur-sm p-8 rounded-3xl shadow-2xl border border-white/20">
+          <SignInForm />
+        </div>
         
-        <div className="text-center">
-          <p className="text-sm text-gray-600">
+        {/* Sign Up Link */}
+        <div className="text-center mt-8">
+          <p className="text-gray-600 mb-4">
             Don't have an account?{' '}
-            <Link href="/signup" className="font-medium text-blue-600 hover:text-blue-500 hover:underline">
-              Sign up
+            <Link href="/signup" className="font-semibold text-blue-600 hover:text-blue-700 transition-colors">
+              Create one now
             </Link>
           </p>
+          
+          {/* Back to Home */}
+          <Link href="/" className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 transition-colors">
+            <ChevronRight className="h-4 w-4 mr-1 rotate-180" />
+            Back to home
+          </Link>
         </div>
       </div>
     </div>

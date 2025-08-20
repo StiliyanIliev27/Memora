@@ -333,13 +333,13 @@ export default function Home() {
                   </p>
                   <div className="flex flex-col sm:flex-row gap-6 justify-center">
                     <Link href="/signup">
-                      <Button size="lg" className="group relative overflow-hidden bg-white text-gray-900 hover:bg-gray-100 px-12 py-6 text-lg font-semibold rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-1">
+                      <Button size="lg" className="group relative overflow-hidden bg-white text-gray-900 hover:bg-gray-100 px-12 py-6 text-lg font-semibold rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform">
                         <span className="relative z-10">Create Your First Memory</span>
                         <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
                       </Button>
                     </Link>
                     <Link href="/signin">
-                      <Button variant="outline" size="lg" className="px-12 py-6 text-lg font-semibold rounded-2xl border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm transition-all duration-300 transform hover:-translate-y-1">
+                      <Button variant="outline" size="lg" className="px-12 py-6 text-lg font-semibold rounded-2xl border-2 border-white/30 text-black hover:bg-white/10 backdrop-blur-sm transition-all duration-300 transform">
                         Sign In to Continue
                         <ChevronRight className="ml-2 h-5 w-5" />
                       </Button>
