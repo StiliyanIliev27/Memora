@@ -54,10 +54,10 @@ export function SignUpForm() {
   }
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader>
-        <CardTitle>Create Account</CardTitle>
-        <CardDescription>
+    <Card className="w-full max-w-md mx-auto shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+      <CardHeader className="text-center">
+        <CardTitle className="text-2xl">Create Account</CardTitle>
+        <CardDescription className="text-base">
           Join Memora to start sharing your memories with loved ones
         </CardDescription>
       </CardHeader>
@@ -128,7 +128,7 @@ export function SignUpForm() {
             </div>
           )}
 
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button type="submit" className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700" disabled={loading}>
             {loading ? 'Creating Account...' : 'Sign Up'}
           </Button>
         </form>

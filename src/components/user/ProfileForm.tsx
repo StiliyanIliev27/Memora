@@ -92,10 +92,10 @@ export function ProfileForm() {
   }
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader>
-        <CardTitle>Profile</CardTitle>
-        <CardDescription>
+    <Card className="w-full max-w-md mx-auto shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+      <CardHeader className="text-center">
+        <CardTitle className="text-2xl">Profile</CardTitle>
+        <CardDescription className="text-base">
           Update your profile information
         </CardDescription>
       </CardHeader>
@@ -153,7 +153,7 @@ export function ProfileForm() {
             </div>
           )}
 
-          <Button type="submit" className="w-full" disabled={saving}>
+          <Button type="submit" className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700" disabled={saving}>
             {saving ? 'Saving...' : 'Save Changes'}
           </Button>
         </form>

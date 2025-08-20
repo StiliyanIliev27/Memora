@@ -52,10 +52,10 @@ export function SignInForm() {
   }
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader>
-        <CardTitle>Welcome Back</CardTitle>
-        <CardDescription>
+    <Card className="w-full max-w-md mx-auto shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+      <CardHeader className="text-center">
+        <CardTitle className="text-2xl">Welcome Back</CardTitle>
+        <CardDescription className="text-base">
           Sign in to your Memora account to continue sharing memories
         </CardDescription>
       </CardHeader>
@@ -97,7 +97,7 @@ export function SignInForm() {
             </div>
           )}
 
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button type="submit" className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700" disabled={loading}>
             {loading ? 'Signing In...' : 'Sign In'}
           </Button>
 
