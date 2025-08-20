@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -13,8 +14,16 @@ export function SignInForm() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
+  const router = useRouter()
 
-  const { signIn } = useAuthContext()
+  const { signIn, user } = useAuthContext()
+
+  // Redirect if user is already authenticated
+  useEffect(() => {
+    if (user) {
+      router.push('/')
+    }
+  }, [user, router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -32,7 +41,10 @@ export function SignInForm() {
       } else {
         console.log('Sign in successful:', data)
         setSuccess('Sign in successful! Redirecting...')
-        // The user will be automatically redirected by the auth context
+        // Manual redirect after a short delay
+        setTimeout(() => {
+          router.push('/')
+        }, 1500)
       }
     } catch (err) {
       console.error('Unexpected error during sign in:', err)
