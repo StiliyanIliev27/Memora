@@ -31,7 +31,7 @@ export function Footer() {
         </div>
         
         <div className="mt-6 pt-6 border-t text-center text-sm text-muted-foreground">
-          © 2025 Memora. All rights reserved.
+          © {new Date().getFullYear()} Memora. All rights reserved.
         </div>
       </div>
     </footer>
