@@ -18,7 +18,6 @@ export function SignInForm() {
 
   const { signIn, user } = useAuthContext()
 
-  // Redirect if user is already authenticated
   useEffect(() => {
     if (user) {
       router.push('/')
@@ -32,22 +31,17 @@ export function SignInForm() {
     setSuccess('')
 
     try {
-      console.log('Attempting to sign in with:', { email })
       const { data, error } = await signIn(email, password)
       
       if (error) {
-        console.error('Sign in error:', error)
         setError(error.message)
       } else {
-        console.log('Sign in successful:', data)
         setSuccess('Sign in successful! Redirecting...')
-        // Manual redirect after a short delay
         setTimeout(() => {
           router.push('/')
         }, 1500)
       }
     } catch (err) {
-      console.error('Unexpected error during sign in:', err)
       setError('An unexpected error occurred. Please check your internet connection and try again.')
     } finally {
       setLoading(false)

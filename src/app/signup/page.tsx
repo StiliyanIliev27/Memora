@@ -1,5 +1,4 @@
 import { SignUpForm } from '@/components/auth/SignUpForm'
-import { EnvChecker } from '@/components/debug/EnvChecker'
 import Link from 'next/link'
 
 export default function SignUpPage() {
@@ -13,7 +12,6 @@ export default function SignUpPage() {
           </p>
         </div>
         
-        <EnvChecker />
         <SignUpForm />
         
         <div className="text-center">
