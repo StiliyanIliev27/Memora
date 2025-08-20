@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -15,14 +15,16 @@ export function SignInForm() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const router = useRouter()
+  const searchParams = useSearchParams()
 
   const { signIn, user } = useAuthContext()
 
   useEffect(() => {
     if (user) {
-      router.push('/')
+      const redirectTo = searchParams.get('redirectTo') || '/'
+      router.push(redirectTo)
     }
-  }, [user, router])
+  }, [user, router, searchParams])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -38,7 +40,8 @@ export function SignInForm() {
       } else {
         setSuccess('Sign in successful! Redirecting...')
         setTimeout(() => {
-          router.push('/')
+          const redirectTo = searchParams.get('redirectTo') || '/'
+          router.push(redirectTo)
         }, 1500)
       }
     } catch (err) {
