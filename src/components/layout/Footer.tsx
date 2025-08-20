@@ -31,7 +31,7 @@ export function Footer() {
         </div>
         
         <div className="mt-6 pt-6 border-t text-center text-sm text-muted-foreground">
-          © 2024 Memora. All rights reserved.
+          © 2025 Memora. All rights reserved.
         </div>
       </div>
     </footer>
