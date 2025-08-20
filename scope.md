@@ -32,14 +32,14 @@ Memora is an interactive world map where people can save and share their memorie
 - [x] Implement authentication middleware/guards
 
 ### Phase 3: Database Schema & User Management
-- [ ] Design and create database tables:
-  - [ ] Users table
-  - [ ] Connections table (relationships between users)
-  - [ ] Memories table (photos, notes, videos)
-  - [ ] Locations table
-- [ ] Set up Row Level Security (RLS) policies
-- [ ] Create database functions and triggers if needed
-- [ ] Test database operations
+- [x] Design and create database tables:
+  - [x] Users table
+  - [x] Connections table (relationships between users)
+  - [x] Memories table (photos, notes, videos)
+  - [x] Locations table (integrated into memories)
+- [x] Set up Row Level Security (RLS) policies
+- [x] Create database functions and triggers if needed
+- [x] Test database operations
 
 ### Phase 4: User Connections System
 - [ ] Create connection request functionality
@@ -110,8 +110,8 @@ Memora is an interactive world map where people can save and share their memorie
 
 ## Current Status
 
-**Phase**: Phase 2 Complete ✅
-**Next Steps**: Begin Phase 3 - Database Schema & User Management
+**Phase**: Phase 3 Complete ✅
+**Next Steps**: Begin Phase 4 - User Connections System
 
 ---
 
