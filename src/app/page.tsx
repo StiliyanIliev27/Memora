@@ -90,96 +90,192 @@ export default function Home() {
         <div className="min-h-screen flex flex-col">
           <Header />
           <main className="flex-1">
-            {/* Hero Section */}
-            <section className="bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-100 py-24">
-            <div className="container mx-auto px-4 text-center">
-              <div className="mb-8">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-6">
-                  <MapPin className="h-10 w-10 text-white" />
+            {/* Hero Section - Mapbox Style */}
+            <section className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 py-32 overflow-hidden">
+              {/* Background Pattern */}
+              <div className="absolute inset-0 opacity-20">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.1)_1px,transparent_0)] bg-[length:20px_20px]"></div>
+              </div>
+              
+              <div className="container mx-auto px-4 relative z-10">
+                <div className="text-center max-w-4xl mx-auto">
+                  <div className="mb-8">
+                    <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mb-8 shadow-2xl">
+                      <MapPin className="h-12 w-12 text-white" />
+                    </div>
+                  </div>
+                  
+                  <h1 className="text-7xl font-bold text-white mb-8 leading-tight">
+                    Maps that do more
+                  </h1>
+                  <p className="text-2xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed">
+                    The location platform for sharing memories, connecting with loved ones, and exploring the world together
+                  </p>
+                  
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <Link href="/signup">
+                      <Button size="lg" className="text-lg px-12 py-6 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 shadow-2xl rounded-xl font-semibold">
+                        Get started for free
+                      </Button>
+                    </Link>
+                    <Link href="/signin">
+                      <Button variant="outline" size="lg" className="text-lg px-12 py-6 border-2 border-white/30 text-white hover:bg-white/10 rounded-xl font-semibold">
+                        Contact us
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
               </div>
-              <h1 className="text-6xl font-bold text-gray-900 mb-6">
-                Share Your Memories, <br />
-                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Explore the World</span>
-              </h1>
-              <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
-                Create an interactive world map where you can save and share your memories 
-                with loved ones. Mark locations with photos, videos, and stories that bring your adventures to life.
-              </p>
-              <div className="flex gap-6 justify-center">
-                <Link href="/signup">
-                  <Button size="lg" className="text-lg px-10 py-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 shadow-lg">
-                    Get Started Free
-                  </Button>
-                </Link>
-                <Link href="/signin">
-                  <Button variant="outline" size="lg" className="text-lg px-10 py-4 border-2">
-                    Sign In
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </section>
+            </section>
 
-          {/* Features Section */}
-          <section className="py-24 bg-white">
-            <div className="container mx-auto px-4">
-              <div className="text-center mb-16">
-                <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                  Why Choose Memora?
+            {/* Features Grid - Pin Traveler Style */}
+            <section className="py-32 bg-white">
+              <div className="container mx-auto px-4">
+                <div className="text-center mb-20">
+                  <h2 className="text-5xl font-bold text-gray-900 mb-6">
+                    Bring location to life with beautiful memories
+                  </h2>
+                  <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Use Memora's interactive maps, ready-made templates, and live updating features to build customizable memory maps for web and mobile.
+                  </p>
+                </div>
+                
+                <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
+                  {/* Interactive Maps */}
+                  <div className="group">
+                    <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-2xl mb-6 group-hover:shadow-xl transition-all duration-300">
+                      <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-xl mb-6">
+                        <MapPin className="h-8 w-8 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-4">Interactive Memory Maps</h3>
+                      <p className="text-gray-600 leading-relaxed mb-6">
+                        Create beautiful, interactive maps where you can pin your memories with photos, videos, and stories. 
+                        Customize your map with different styles and share with loved ones.
+                      </p>
+                      <div className="flex items-center text-blue-600 font-semibold group-hover:text-blue-700 transition-colors">
+                        Explore Maps
+                        <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Memory Sharing */}
+                  <div className="group">
+                    <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-2xl mb-6 group-hover:shadow-xl transition-all duration-300">
+                      <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-600 rounded-xl mb-6">
+                        <Heart className="h-8 w-8 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-4">Share Memories Together</h3>
+                      <p className="text-gray-600 leading-relaxed mb-6">
+                        Connect with partners, friends, and groups to create shared memory collections. 
+                        Everyone can contribute photos and stories to build a collective journey.
+                      </p>
+                      <div className="flex items-center text-purple-600 font-semibold group-hover:text-purple-700 transition-colors">
+                        Learn More
+                        <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Global Connections */}
+                  <div className="group">
+                    <div className="bg-gradient-to-br from-green-50 to-blue-50 p-8 rounded-2xl mb-6 group-hover:shadow-xl transition-all duration-300">
+                      <div className="inline-flex items-center justify-center w-16 h-16 bg-green-600 rounded-xl mb-6">
+                        <Users className="h-8 w-8 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-4">Global Connections</h3>
+                      <p className="text-gray-600 leading-relaxed mb-6">
+                        Build meaningful connections across the globe. Whether it's couples, friends, or groups, 
+                        create lasting bonds through shared experiences and memories.
+                      </p>
+                      <div className="flex items-center text-green-600 font-semibold group-hover:text-green-700 transition-colors">
+                        Discover Connections
+                        <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Smart Search */}
+                  <div className="group">
+                    <div className="bg-gradient-to-br from-orange-50 to-red-50 p-8 rounded-2xl mb-6 group-hover:shadow-xl transition-all duration-300">
+                      <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-600 rounded-xl mb-6">
+                        <Camera className="h-8 w-8 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-4">Smart Memory Capture</h3>
+                      <p className="text-gray-600 leading-relaxed mb-6">
+                        Easily capture and organize your memories with intelligent features. 
+                        Upload photos, videos, and notes, then let Memora help you organize them beautifully.
+                      </p>
+                      <div className="flex items-center text-orange-600 font-semibold group-hover:text-orange-700 transition-colors">
+                        Start Capturing
+                        <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Social Proof Section */}
+            <section className="py-24 bg-gray-50">
+              <div className="container mx-auto px-4">
+                <div className="text-center mb-16">
+                  <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                    Trusted by memory makers worldwide
+                  </h2>
+                  <p className="text-xl text-gray-600">
+                    Join thousands of people who are already sharing their memories and exploring the world together
+                  </p>
+                </div>
+                
+                <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                  <div className="text-center p-6">
+                    <div className="text-4xl font-bold text-blue-600 mb-2">10K+</div>
+                    <div className="text-gray-600">Active Users</div>
+                  </div>
+                  <div className="text-center p-6">
+                    <div className="text-4xl font-bold text-purple-600 mb-2">50K+</div>
+                    <div className="text-gray-600">Memories Shared</div>
+                  </div>
+                  <div className="text-center p-6">
+                    <div className="text-4xl font-bold text-green-600 mb-2">150+</div>
+                    <div className="text-gray-600">Countries Explored</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* CTA Section - Mapbox Style */}
+            <section className="py-32 bg-gradient-to-r from-slate-900 to-blue-900">
+              <div className="container mx-auto px-4 text-center">
+                <h2 className="text-5xl font-bold text-white mb-8">
+                  Ready to get started?
                 </h2>
-                <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                  Connect with your loved ones through shared experiences across the globe
+                <p className="text-xl text-blue-100 mb-12 max-w-2xl mx-auto">
+                  Create an account or talk to one of our experts about building your perfect memory map.
                 </p>
-              </div>
-              <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
-                <div className="text-center group">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-6 group-hover:bg-red-200 transition-colors">
-                    <Heart className="h-8 w-8 text-red-600" />
-                  </div>
-                  <h3 className="text-2xl font-semibold mb-4 text-gray-900">Couples</h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Share romantic moments and travel memories with your partner. Create a visual timeline of your love story across the world.
-                  </p>
-                </div>
-                <div className="text-center group">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-100 rounded-full mb-6 group-hover:bg-yellow-200 transition-colors">
-                    <Star className="h-8 w-8 text-yellow-600" />
-                  </div>
-                  <h3 className="text-2xl font-semibold mb-4 text-gray-900">Friends</h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Create shared memories with your closest friends. Plan trips together and relive your adventures through photos and stories.
-                  </p>
-                </div>
-                <div className="text-center group">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6 group-hover:bg-green-200 transition-colors">
-                    <Users className="h-8 w-8 text-green-600" />
-                  </div>
-                  <h3 className="text-2xl font-semibold mb-4 text-gray-900">Groups</h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Organize group trips and events with multiple people. Everyone can contribute their memories to create a collective story.
-                  </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link href="/signup">
+                    <Button size="lg" className="text-lg px-12 py-6 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 shadow-2xl rounded-xl font-semibold">
+                      Sign up for free
+                    </Button>
+                  </Link>
+                  <Link href="/signin">
+                    <Button variant="outline" size="lg" className="text-lg px-12 py-6 border-2 border-white/30 text-white hover:bg-white/10 rounded-xl font-semibold">
+                      Contact us
+                    </Button>
+                  </Link>
                 </div>
               </div>
-            </div>
-          </section>
-
-          {/* CTA Section */}
-          <section className="py-24 bg-gradient-to-r from-blue-600 to-purple-600">
-            <div className="container mx-auto px-4 text-center">
-              <h2 className="text-4xl font-bold text-white mb-6">
-                Ready to Start Your Journey?
-              </h2>
-              <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
-                Join thousands of people who are already sharing their memories and exploring the world together.
-              </p>
-              <Link href="/signup">
-                <Button size="lg" className="text-lg px-10 py-4 bg-white text-blue-600 hover:bg-gray-100 shadow-lg">
-                  Create Your First Memory
-                </Button>
-              </Link>
-            </div>
-          </section>
+            </section>
           </main>
           <Footer />
         </div>
