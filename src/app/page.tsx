@@ -25,61 +25,134 @@ export default function Home() {
         <div className="min-h-screen flex flex-col">
           <Header />
           <main className="flex-1">
-            <div className="container mx-auto px-4 py-12">
-              <div className="text-center mb-12">
-                <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
-                  Welcome back, {user.user_metadata?.name || 'Friend'}!
+            <div className="container mx-auto px-4">
+              {/* Welcome Section */}
+              <div className="text-center mb-16">
+                <div className="mb-8">
+                  <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl mb-6 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500">
+                    <MapPin className="h-10 w-10 text-white" />
+                  </div>
+                </div>
+                <h1 className="text-5xl md:text-6xl font-black text-gray-900 mb-6">
+                  Welcome back, <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">{user.user_metadata?.name || 'Friend'}</span>!
                 </h1>
-                <p className="text-xl text-gray-600 mb-8">
-                  Ready to explore and share your memories?
+                <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-light">
+                  Ready to explore and share your memories? Choose your next adventure below.
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {/* Feature Cards Grid */}
+              <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <Link href="/map">
-                  <div className="bg-white p-8 rounded-xl shadow-lg border hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer h-full flex flex-col">
-                    <div className="text-blue-600 mb-4">
-                      <MapPin className="h-12 w-12" />
+                  <div className="group relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
+                    <div className="relative bg-white p-8 rounded-3xl shadow-xl border border-gray-100 group-hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2 h-full flex flex-col">
+                      <div className="flex items-start gap-4 mb-6">
+                        <div className="flex-shrink-0">
+                          <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            <MapPin className="h-8 w-8 text-white" />
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-2xl font-bold text-gray-900 mb-2">Interactive Map</h3>
+                          <p className="text-gray-600 leading-relaxed">
+                            Explore your memories on a beautiful world map with interactive markers and stunning visuals.
+                          </p>
+                        </div>
+                      </div>
+                      <Button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 mt-auto group-hover:shadow-lg transition-all duration-300">
+                        Explore Map
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                      </Button>
                     </div>
-                    <h3 className="text-xl font-semibold mb-3">Interactive Map</h3>
-                    <p className="text-gray-600 mb-6 flex-grow">
-                      Explore your memories on a beautiful world map with interactive markers
-                    </p>
-                    <Button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 mt-auto">
-                      Explore Map
-                    </Button>
                   </div>
                 </Link>
 
                 <Link href="/add-memory">
-                  <div className="bg-white p-8 rounded-xl shadow-lg border hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer h-full flex flex-col">
-                    <div className="text-purple-600 mb-4">
-                      <Camera className="h-12 w-12" />
+                  <div className="group relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
+                    <div className="relative bg-white p-8 rounded-3xl shadow-xl border border-gray-100 group-hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2 h-full flex flex-col">
+                      <div className="flex items-start gap-4 mb-6">
+                        <div className="flex-shrink-0">
+                          <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            <Camera className="h-8 w-8 text-white" />
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-2xl font-bold text-gray-900 mb-2">Add Memories</h3>
+                          <p className="text-gray-600 leading-relaxed">
+                            Upload photos, videos, and notes to your favorite locations and create lasting stories.
+                          </p>
+                        </div>
+                      </div>
+                      <Button className="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 mt-auto group-hover:shadow-lg transition-all duration-300">
+                        Add Memory
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                      </Button>
                     </div>
-                    <h3 className="text-xl font-semibold mb-3">Add Memories</h3>
-                    <p className="text-gray-600 mb-6 flex-grow">
-                      Upload photos, videos, and notes to your favorite locations
-                    </p>
-                    <Button className="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 mt-auto">
-                      Add Memory
-                    </Button>
                   </div>
                 </Link>
 
                 <Link href="/connections">
-                  <div className="bg-white p-8 rounded-xl shadow-lg border hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer h-full flex flex-col">
-                    <div className="text-green-600 mb-4">
-                      <Users className="h-12 w-12" />
+                  <div className="group relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-blue-600 rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
+                    <div className="relative bg-white p-8 rounded-3xl shadow-xl border border-gray-100 group-hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2 h-full flex flex-col">
+                      <div className="flex items-start gap-4 mb-6">
+                        <div className="flex-shrink-0">
+                          <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            <Users className="h-8 w-8 text-white" />
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-2xl font-bold text-gray-900 mb-2">Connections</h3>
+                          <p className="text-gray-600 leading-relaxed">
+                            Connect with friends, partners, and groups to share memories and build meaningful relationships.
+                          </p>
+                        </div>
+                      </div>
+                      <Button className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 mt-auto group-hover:shadow-lg transition-all duration-300">
+                        Manage Connections
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                      </Button>
                     </div>
-                    <h3 className="text-xl font-semibold mb-3">Connections</h3>
-                    <p className="text-gray-600 mb-6 flex-grow">
-                      Connect with friends, partners, and groups to share memories
-                    </p>
-                    <Button className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 mt-auto">
-                      Manage Connections
-                    </Button>
                   </div>
                 </Link>
+              </div>
+
+              {/* Quick Stats Section */}
+              <div className="mt-20">
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Your <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Memory Journey</span>
+                  </h2>
+                  <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Track your progress and see how your memories are growing across the world.
+                  </p>
+                </div>
+                
+                <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                  <div className="text-center group">
+                    <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 group-hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1">
+                      <div className="text-3xl font-black bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-2">0</div>
+                      <div className="text-gray-600 font-medium">Memories Created</div>
+                      <div className="text-sm text-gray-500 mt-1">Start your collection</div>
+                    </div>
+                  </div>
+                  <div className="text-center group">
+                    <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 group-hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1">
+                      <div className="text-3xl font-black bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text text-transparent mb-2">0</div>
+                      <div className="text-gray-600 font-medium">Countries Visited</div>
+                      <div className="text-sm text-gray-500 mt-1">Explore the world</div>
+                    </div>
+                  </div>
+                  <div className="text-center group">
+                    <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 group-hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1">
+                      <div className="text-3xl font-black bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent mb-2">0</div>
+                      <div className="text-gray-600 font-medium">Connections Made</div>
+                      <div className="text-sm text-gray-500 mt-1">Build relationships</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </main>
