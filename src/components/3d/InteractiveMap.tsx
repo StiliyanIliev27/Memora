@@ -172,8 +172,8 @@ function CartoonEarth() {
       <Sphere args={[3, 64, 64]}>
         <meshStandardMaterial 
           map={earthTexture}
-          roughness={0.2}
-          metalness={0.05}
+          roughness={0.1}
+          metalness={0.02}
         />
       </Sphere>
 
@@ -191,14 +191,14 @@ function CartoonEarth() {
         </Sphere>
       </group>
 
-      {/* Add a subtle glow around the Earth */}
+      {/* Add a bright glow around the Earth */}
       <Sphere args={[3.1, 32, 32]}>
         <meshStandardMaterial 
           color="#4A90E2"
           transparent
-          opacity={0.05}
+          opacity={0.1}
           emissive="#4A90E2"
-          emissiveIntensity={0.05}
+          emissiveIntensity={0.1}
         />
       </Sphere>
 
@@ -218,10 +218,11 @@ function Scene() {
 
   return (
     <>
-      {/* Natural lighting for Earth */}
-      <ambientLight intensity={0.8} color="#FFFFFF" />
-      <directionalLight position={[10, 10, 5]} intensity={1.2} color="#FFFFFF" />
-      <pointLight position={[-10, -10, -5]} intensity={0.4} color="#4A90E2" />
+      {/* Bright lighting for Earth */}
+      <ambientLight intensity={1.2} color="#FFFFFF" />
+      <directionalLight position={[10, 10, 5]} intensity={1.8} color="#FFFFFF" />
+      <pointLight position={[-10, -10, -5]} intensity={0.6} color="#4A90E2" />
+      <pointLight position={[10, -10, 5]} intensity={0.4} color="#FFFFFF" />
       
       <CartoonEarth />
       
