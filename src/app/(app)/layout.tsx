@@ -9,10 +9,10 @@ export default function AppLayout({
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 pt-20 pb-16">
+      <main className="flex-1 pt-14 pb-14">
         {children}
       </main>
       <Footer />
-    </div>
+    </div> 
   )
 }
