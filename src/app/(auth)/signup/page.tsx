@@ -20,7 +20,7 @@ export default function SignUpPage() {
         <div className="bg-white rounded-3xl shadow-2xl overflow-hidden w-full">
           <div className="flex min-h-[600px]">
             {/* Left Column - Interactive 3D Map (60%) - Hidden on mobile */}
-            <div className="hidden lg:flex lg:w-3/5 relative overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+            <div className="hidden lg:flex lg:w-3/5 relative overflow-hidden bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100">
               <InteractiveMap />
             </div>
             

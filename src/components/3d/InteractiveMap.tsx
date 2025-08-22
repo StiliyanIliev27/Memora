@@ -19,7 +19,7 @@ interface MemoryMarker {
 const markers: MemoryMarker[] = [
   {
     id: 'paris',
-    position: [2.5, 1.2, 1.5],
+    position: [2.2, 1.8, 1.2], // Europe - France
     icon: 'heart',
     color: '#ef4444',
     location: 'Paris, France',
@@ -28,7 +28,7 @@ const markers: MemoryMarker[] = [
   },
   {
     id: 'tokyo',
-    position: [2.8, 0.8, -1.2],
+    position: [2.8, 1.0, -1.5], // Asia - Japan
     icon: 'users',
     color: '#3b82f6',
     location: 'Tokyo, Japan',
@@ -37,7 +37,7 @@ const markers: MemoryMarker[] = [
   },
   {
     id: 'newyork',
-    position: [-2.2, 1.5, -1.8],
+    position: [-2.5, 1.5, -1.0], // North America - USA
     icon: 'mappin',
     color: '#8b5cf6',
     location: 'New York, USA',
@@ -177,6 +177,7 @@ function CartoonEarth() {
           bumpScale={0.02}
           roughness={0.15}
           metalness={0.01}
+          color="#E6F3FF" // Light blue tint for lighter oceans
         />
       </Sphere>
 
