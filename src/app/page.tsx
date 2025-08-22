@@ -24,7 +24,7 @@ export default function Home() {
         // Authenticated user - show dashboard with app layout
         <div className="min-h-screen flex flex-col">
           <Header />
-          <main className="flex-1">
+          <main className="flex-1 py-16">
             <div className="container mx-auto px-4">
               {/* Welcome Section */}
               <div className="text-center mb-16">
@@ -178,7 +178,7 @@ export default function Home() {
               <div className="container mx-auto px-4 relative z-10">
                 <div className="text-center max-w-5xl mx-auto">
                   {/* Logo/Brand */}
-                  <div className="mb-12">
+                  <div>
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl mb-8 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500">
                       <MapPin className="h-10 w-10 text-white" />
                     </div>

@@ -37,7 +37,7 @@ export function Header() {
   return (
     <header className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 sticky top-0 z-50 shadow-sm">
       <div className="container flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Logo */}
+        {/* Logo - Always on the left */}
         <div className="flex items-center space-x-2">
           <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
             <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Memora</h1>
@@ -69,7 +69,7 @@ export function Header() {
           </nav>
         )}
 
-        {/* User Menu */}
+        {/* Right side - Get Started for non-auth users, User menu for auth users */}
         <div className="flex items-center space-x-4">
           {user ? (
             <>
@@ -110,18 +110,11 @@ export function Header() {
               </DropdownMenu>
             </>
           ) : (
-            <div className="flex items-center space-x-2">
-              <Link href="/signin">
-                <Button variant="ghost" size="sm">
-                  Sign In
-                </Button>
-              </Link>
-              <Link href="/signup">
-                <Button size="sm">
-                  Sign Up
-                </Button>
-              </Link>
-            </div>
+            <Link href="/signup">
+              <Button size="sm" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white">
+                Get Started
+              </Button>
+            </Link>
           )}
         </div>
       </div>
