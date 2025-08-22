@@ -148,57 +148,60 @@ function CartoonEarth() {
   const groupRef = useRef<Group>(null)
   const cloudsRef = useRef<Group>(null)
   
-  // Cartoon-style Earth textures with vibrant colors
+  // High-resolution Earth textures for better quality
   const earthTexture = useTexture('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_atmos_2048.jpg')
+  const bumpMap = useTexture('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_normal_2048.jpg')
   const cloudsTexture = useTexture('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_clouds_1024.png')
 
   useFrame((state) => {
     if (groupRef.current) {
-      // Slower, more gentle rotation
-      groupRef.current.rotation.y = state.clock.getElapsedTime() * 0.05
+      // Slower, more gentle rotation like earth3dmap.com
+      groupRef.current.rotation.y = state.clock.getElapsedTime() * 0.03
       // Add a gentle wobble
-      groupRef.current.rotation.z = Math.sin(state.clock.getElapsedTime() * 0.5) * 0.02
+      groupRef.current.rotation.z = Math.sin(state.clock.getElapsedTime() * 0.3) * 0.01
     }
     
     if (cloudsRef.current) {
       // Clouds rotate slightly faster than the Earth
-      cloudsRef.current.rotation.y = state.clock.getElapsedTime() * 0.08
+      cloudsRef.current.rotation.y = state.clock.getElapsedTime() * 0.05
     }
   })
 
   return (
     <group ref={groupRef}>
-      {/* Main Earth sphere with natural NASA colors */}
-      <Sphere args={[3, 64, 64]}>
+      {/* Main Earth sphere with high-resolution textures */}
+      <Sphere args={[3, 128, 128]}>
         <meshStandardMaterial 
           map={earthTexture}
-          roughness={0.1}
-          metalness={0.02}
+          bumpMap={bumpMap}
+          bumpScale={0.02}
+          roughness={0.15}
+          metalness={0.01}
         />
       </Sphere>
 
-      {/* Very subtle clouds layer - almost invisible */}
+      {/* Subtle clouds layer */}
       <group ref={cloudsRef}>
-        <Sphere args={[3.02, 64, 64]}>
+        <Sphere args={[3.02, 128, 128]}>
           <meshStandardMaterial 
             map={cloudsTexture}
             color="#FFFFFF"
             transparent
-            opacity={0.15} // Much more subtle clouds
+            opacity={0.2}
             emissive="#FFFFFF"
-            emissiveIntensity={0.05}
+            emissiveIntensity={0.02}
           />
         </Sphere>
       </group>
 
-      {/* Add a bright glow around the Earth */}
-      <Sphere args={[3.1, 32, 32]}>
+      {/* Atmospheric glow like earth3dmap.com */}
+      <Sphere args={[3.15, 64, 64]}>
         <meshStandardMaterial 
-          color="#4A90E2"
+          color="#87CEEB"
           transparent
-          opacity={0.1}
-          emissive="#4A90E2"
-          emissiveIntensity={0.1}
+          opacity={0.08}
+          emissive="#87CEEB"
+          emissiveIntensity={0.05}
         />
       </Sphere>
 
@@ -218,11 +221,11 @@ function Scene() {
 
   return (
     <>
-      {/* Bright lighting for Earth */}
-      <ambientLight intensity={1.2} color="#FFFFFF" />
-      <directionalLight position={[10, 10, 5]} intensity={1.8} color="#FFFFFF" />
-      <pointLight position={[-10, -10, -5]} intensity={0.6} color="#4A90E2" />
-      <pointLight position={[10, -10, 5]} intensity={0.4} color="#FFFFFF" />
+      {/* High-quality lighting like earth3dmap.com */}
+      <ambientLight intensity={0.9} color="#FFFFFF" />
+      <directionalLight position={[10, 10, 5]} intensity={1.5} color="#FFFFFF" />
+      <directionalLight position={[-10, -10, -5]} intensity={0.3} color="#87CEEB" />
+      <pointLight position={[0, 10, 0]} intensity={0.2} color="#FFFFFF" />
       
       <CartoonEarth />
       
@@ -230,11 +233,12 @@ function Scene() {
         enableZoom={false}
         enablePan={false}
         autoRotate
-        autoRotateSpeed={0.3}
+        autoRotateSpeed={0.2}
         maxPolarAngle={Math.PI / 2}
         minPolarAngle={Math.PI / 3}
-        dampingFactor={0.1}
+        dampingFactor={0.05}
         enableDamping
+        rotateSpeed={0.5}
       />
     </>
   )
