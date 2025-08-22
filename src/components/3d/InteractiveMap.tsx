@@ -1,7 +1,7 @@
 'use client'
 
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { OrbitControls, Text, Sphere, Html } from '@react-three/drei'
+import { OrbitControls, Text, Sphere, Html, useTexture } from '@react-three/drei'
 import { useRef, useState } from 'react'
 import { Group, Vector3 } from 'three'
 import { Heart, Users, MapPin } from 'lucide-react'
@@ -19,7 +19,7 @@ interface MemoryMarker {
 const markers: MemoryMarker[] = [
   {
     id: 'paris',
-    position: [-2, 1, 0],
+    position: [2.5, 1.2, 1.5],
     icon: 'heart',
     color: '#ef4444',
     location: 'Paris, France',
@@ -28,7 +28,7 @@ const markers: MemoryMarker[] = [
   },
   {
     id: 'tokyo',
-    position: [3, 0.5, 1],
+    position: [2.8, 0.8, -1.2],
     icon: 'users',
     color: '#3b82f6',
     location: 'Tokyo, Japan',
@@ -37,7 +37,7 @@ const markers: MemoryMarker[] = [
   },
   {
     id: 'newyork',
-    position: [-1, -1, 2],
+    position: [-2.2, 1.5, -1.8],
     icon: 'mappin',
     color: '#8b5cf6',
     location: 'New York, USA',
@@ -127,7 +127,7 @@ function FloatingMarker({ marker }: { marker: MemoryMarker }) {
   )
 }
 
-function WorldMap() {
+function Earth() {
   const groupRef = useRef<Group>(null)
 
   useFrame((state) => {
@@ -138,27 +138,23 @@ function WorldMap() {
 
   return (
     <group ref={groupRef}>
-      {/* Base world sphere */}
-      <Sphere args={[3, 32, 32]}>
+      {/* Earth sphere with realistic appearance */}
+      <Sphere args={[3, 64, 64]}>
         <meshStandardMaterial 
-          color="#e0f2fe"
-          transparent
-          opacity={0.3}
-          wireframe
+          color="#1e40af"
+          roughness={0.8}
+          metalness={0.1}
         />
       </Sphere>
 
-      {/* Grid lines */}
-      <group>
-        {Array.from({ length: 10 }, (_, i) => (
-          <group key={i}>
-            <mesh position={[0, (i - 5) * 0.6, 0]}>
-              <ringGeometry args={[2.5, 3, 32]} />
-              <meshBasicMaterial color="#3b82f6" transparent opacity={0.1} />
-            </mesh>
-          </group>
-        ))}
-      </group>
+      {/* Ocean layer */}
+      <Sphere args={[3.005, 64, 64]}>
+        <meshStandardMaterial 
+          color="#0ea5e9"
+          transparent
+          opacity={0.3}
+        />
+      </Sphere>
 
       {/* Memory markers */}
       {markers.map((marker) => (
@@ -180,7 +176,7 @@ function Scene() {
       <directionalLight position={[10, 10, 5]} intensity={1} />
       <pointLight position={[-10, -10, -5]} intensity={0.5} color="#3b82f6" />
       
-      <WorldMap />
+      <Earth />
       
       <OrbitControls 
         enableZoom={false}
@@ -203,44 +199,6 @@ export default function InteractiveMap() {
       >
         <Scene />
       </Canvas>
-      
-      {/* Overlay content */}
-      <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-12 pointer-events-none">
-        <div className="max-w-md">
-          <div className="mb-8">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 backdrop-blur-sm rounded-3xl mb-6 shadow-2xl">
-              <MapPin className="h-10 w-10 text-white" />
-            </div>
-          </div>
-          
-          <h2 className="text-4xl font-bold mb-4 text-white drop-shadow-lg">
-            Your Memories, <br />
-            <span className="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
-              Everywhere
-            </span>
-          </h2>
-          
-          <p className="text-lg text-white/90 mb-8 leading-relaxed drop-shadow-md">
-            Join thousands of people who are already creating, sharing, and preserving 
-            their most precious memories with Memora.
-          </p>
-          
-          <div className="space-y-4">
-            <div className="flex items-center justify-center space-x-3">
-              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-              <span className="text-white/90 drop-shadow-sm">Interactive world maps</span>
-            </div>
-            <div className="flex items-center justify-center space-x-3">
-              <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-              <span className="text-white/90 drop-shadow-sm">Share with loved ones</span>
-            </div>
-            <div className="flex items-center justify-center space-x-3">
-              <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-              <span className="text-white/90 drop-shadow-sm">Beautiful memory galleries</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   )
 }
