@@ -54,8 +54,13 @@ function FloatingMarker({ marker }: { marker: MemoryMarker }) {
   useFrame((state) => {
     if (meshRef.current) {
       const time = state.clock.getElapsedTime() + marker.animationDelay
-      meshRef.current.position.y = marker.position[1] + Math.sin(time * 2) * 0.1
-      meshRef.current.rotation.y = time * 0.5
+      // More bouncy and playful animation
+      meshRef.current.position.y = marker.position[1] + Math.sin(time * 3) * 0.2
+      meshRef.current.rotation.y = time * 0.8
+      meshRef.current.rotation.z = Math.sin(time * 2) * 0.1
+      // Add a gentle scale animation
+      const scale = 1 + Math.sin(time * 4) * 0.1
+      meshRef.current.scale.set(scale, scale, scale)
     }
   })
 
@@ -89,24 +94,36 @@ function FloatingMarker({ marker }: { marker: MemoryMarker }) {
         <meshStandardMaterial 
           color={marker.color} 
           emissive={marker.color}
-          emissiveIntensity={hovered ? 0.3 : 0.1}
-          metalness={0.8}
-          roughness={0.2}
+          emissiveIntensity={hovered ? 0.5 : 0.2}
+          metalness={0.9}
+          roughness={0.1}
+        />
+      </Sphere>
+      
+      {/* Add a glowing ring around the marker */}
+      <Sphere args={[0.2, 16, 16]}>
+        <meshStandardMaterial 
+          color={marker.color}
+          transparent
+          opacity={hovered ? 0.3 : 0.1}
+          emissive={marker.color}
+          emissiveIntensity={0.2}
         />
       </Sphere>
       
       <Html
-        position={[0, 0.3, 0]}
+        position={[0, 0.4, 0]}
         center
         distanceFactor={8}
         style={{
           pointerEvents: 'none',
           opacity: showTooltip ? 1 : 0,
           transition: 'opacity 0.3s ease',
+          transform: showTooltip ? 'scale(1.1)' : 'scale(1)',
         }}
       >
-        <div className="bg-white px-3 py-2 rounded-lg shadow-lg text-sm whitespace-nowrap border border-gray-200">
-          <div className="font-semibold text-gray-900">{marker.location}</div>
+        <div className="bg-white px-3 py-2 rounded-xl shadow-xl text-sm whitespace-nowrap border-2 border-gray-200 bg-gradient-to-r from-white to-gray-50">
+          <div className="font-bold text-gray-900">{marker.location}</div>
           <div className="text-gray-600">{marker.description}</div>
         </div>
       </Html>
@@ -127,39 +144,64 @@ function FloatingMarker({ marker }: { marker: MemoryMarker }) {
   )
 }
 
-function Earth() {
+function CartoonEarth() {
   const groupRef = useRef<Group>(null)
+  const cloudsRef = useRef<Group>(null)
   
-  // High-quality NASA Earth textures
+  // Cartoon-style Earth textures with vibrant colors
   const earthTexture = useTexture('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_atmos_2048.jpg')
-  const bumpMap = useTexture('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_normal_2048.jpg')
   const cloudsTexture = useTexture('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_clouds_1024.png')
 
   useFrame((state) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y = state.clock.getElapsedTime() * 0.1
+      // Slower, more gentle rotation
+      groupRef.current.rotation.y = state.clock.getElapsedTime() * 0.05
+      // Add a gentle wobble
+      groupRef.current.rotation.z = Math.sin(state.clock.getElapsedTime() * 0.5) * 0.02
+    }
+    
+    if (cloudsRef.current) {
+      // Clouds rotate slightly faster than the Earth
+      cloudsRef.current.rotation.y = state.clock.getElapsedTime() * 0.08
     }
   })
 
   return (
     <group ref={groupRef}>
-      {/* Earth sphere with realistic NASA textures */}
+      {/* Main Earth sphere with cartoon-style materials */}
       <Sphere args={[3, 64, 64]}>
         <meshStandardMaterial 
           map={earthTexture}
-          bumpMap={bumpMap}
-          bumpScale={0.05}
-          roughness={0.8}
+          color="#87CEEB" // Light blue tint for cartoon look
+          emissive="#4A90E2"
+          emissiveIntensity={0.1}
+          roughness={0.3}
           metalness={0.1}
         />
       </Sphere>
 
-      {/* Clouds layer */}
-      <Sphere args={[3.01, 64, 64]}>
+      {/* Cartoon-style clouds layer */}
+      <group ref={cloudsRef}>
+        <Sphere args={[3.02, 64, 64]}>
+          <meshStandardMaterial 
+            map={cloudsTexture}
+            color="#FFFFFF"
+            transparent
+            opacity={0.6}
+            emissive="#FFFFFF"
+            emissiveIntensity={0.1}
+          />
+        </Sphere>
+      </group>
+
+      {/* Add a subtle glow around the Earth */}
+      <Sphere args={[3.1, 32, 32]}>
         <meshStandardMaterial 
-          map={cloudsTexture}
+          color="#4A90E2"
           transparent
-          opacity={0.4}
+          opacity={0.1}
+          emissive="#4A90E2"
+          emissiveIntensity={0.2}
         />
       </Sphere>
 
@@ -179,19 +221,23 @@ function Scene() {
 
   return (
     <>
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[10, 10, 5]} intensity={1} />
-      <pointLight position={[-10, -10, -5]} intensity={0.5} color="#3b82f6" />
+      {/* Brighter, more cartoon-like lighting */}
+      <ambientLight intensity={0.8} color="#FFFFFF" />
+      <directionalLight position={[10, 10, 5]} intensity={1.2} color="#FFFFFF" />
+      <pointLight position={[-10, -10, -5]} intensity={0.8} color="#4A90E2" />
+      <pointLight position={[10, -10, 5]} intensity={0.6} color="#FF6B6B" />
       
-      <Earth />
+      <CartoonEarth />
       
       <OrbitControls 
         enableZoom={false}
         enablePan={false}
         autoRotate
-        autoRotateSpeed={0.5}
+        autoRotateSpeed={0.3}
         maxPolarAngle={Math.PI / 2}
         minPolarAngle={Math.PI / 3}
+        dampingFactor={0.1}
+        enableDamping
       />
     </>
   )
