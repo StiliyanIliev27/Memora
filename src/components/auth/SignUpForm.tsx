@@ -55,12 +55,6 @@ export function SignUpForm() {
 
   return (
     <div className="w-full">
-      <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Create Account</h2>
-        <p className="text-gray-600">
-          Join Memora to start sharing your memories with loved ones
-        </p>
-      </div>
       <div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">

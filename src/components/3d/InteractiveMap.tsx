@@ -2,8 +2,8 @@
 
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls, Text, Sphere, Html, useTexture } from '@react-three/drei'
-import { useRef, useState } from 'react'
-import { Group, Vector3 } from 'three'
+import { useRef, useState, useEffect } from 'react'
+import { Group, Vector3, RepeatWrapping } from 'three'
 import { Heart, Users, MapPin } from 'lucide-react'
 
 interface MemoryMarker {
@@ -129,6 +129,11 @@ function FloatingMarker({ marker }: { marker: MemoryMarker }) {
 
 function Earth() {
   const groupRef = useRef<Group>(null)
+  
+  // High-quality NASA Earth textures
+  const earthTexture = useTexture('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_atmos_2048.jpg')
+  const bumpMap = useTexture('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_normal_2048.jpg')
+  const cloudsTexture = useTexture('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_clouds_1024.png')
 
   useFrame((state) => {
     if (groupRef.current) {
@@ -138,21 +143,23 @@ function Earth() {
 
   return (
     <group ref={groupRef}>
-      {/* Earth sphere with realistic appearance */}
+      {/* Earth sphere with realistic NASA textures */}
       <Sphere args={[3, 64, 64]}>
         <meshStandardMaterial 
-          color="#1e40af"
+          map={earthTexture}
+          bumpMap={bumpMap}
+          bumpScale={0.05}
           roughness={0.8}
           metalness={0.1}
         />
       </Sphere>
 
-      {/* Ocean layer */}
-      <Sphere args={[3.005, 64, 64]}>
+      {/* Clouds layer */}
+      <Sphere args={[3.01, 64, 64]}>
         <meshStandardMaterial 
-          color="#0ea5e9"
+          map={cloudsTexture}
           transparent
-          opacity={0.3}
+          opacity={0.4}
         />
       </Sphere>
 

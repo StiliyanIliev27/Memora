@@ -53,12 +53,6 @@ export function SignInForm() {
 
   return (
     <div className="w-full">
-      <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome Back</h2>
-        <p className="text-gray-600">
-          Sign in to your Memora account to continue sharing memories
-        </p>
-      </div>
       <div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
