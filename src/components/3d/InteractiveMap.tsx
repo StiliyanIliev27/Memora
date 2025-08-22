@@ -168,28 +168,25 @@ function CartoonEarth() {
 
   return (
     <group ref={groupRef}>
-      {/* Main Earth sphere with cartoon-style materials */}
+      {/* Main Earth sphere with natural NASA colors */}
       <Sphere args={[3, 64, 64]}>
         <meshStandardMaterial 
           map={earthTexture}
-          color="#87CEEB" // Light blue tint for cartoon look
-          emissive="#4A90E2"
-          emissiveIntensity={0.1}
-          roughness={0.3}
-          metalness={0.1}
+          roughness={0.2}
+          metalness={0.05}
         />
       </Sphere>
 
-      {/* Cartoon-style clouds layer */}
+      {/* Very subtle clouds layer - almost invisible */}
       <group ref={cloudsRef}>
         <Sphere args={[3.02, 64, 64]}>
           <meshStandardMaterial 
             map={cloudsTexture}
             color="#FFFFFF"
             transparent
-            opacity={0.6}
+            opacity={0.15} // Much more subtle clouds
             emissive="#FFFFFF"
-            emissiveIntensity={0.1}
+            emissiveIntensity={0.05}
           />
         </Sphere>
       </group>
@@ -199,9 +196,9 @@ function CartoonEarth() {
         <meshStandardMaterial 
           color="#4A90E2"
           transparent
-          opacity={0.1}
+          opacity={0.05}
           emissive="#4A90E2"
-          emissiveIntensity={0.2}
+          emissiveIntensity={0.05}
         />
       </Sphere>
 
@@ -221,11 +218,10 @@ function Scene() {
 
   return (
     <>
-      {/* Brighter, more cartoon-like lighting */}
+      {/* Natural lighting for Earth */}
       <ambientLight intensity={0.8} color="#FFFFFF" />
       <directionalLight position={[10, 10, 5]} intensity={1.2} color="#FFFFFF" />
-      <pointLight position={[-10, -10, -5]} intensity={0.8} color="#4A90E2" />
-      <pointLight position={[10, -10, 5]} intensity={0.6} color="#FF6B6B" />
+      <pointLight position={[-10, -10, -5]} intensity={0.4} color="#4A90E2" />
       
       <CartoonEarth />
       
