@@ -66,6 +66,13 @@ export function useAuth() {
     return { data, error }
   }
 
+  const updatePassword = async (password: string) => {
+    const { data, error } = await supabase.auth.updateUser({
+      password: password
+    })
+    return { data, error }
+  }
+
   return {
     user,
     session,
@@ -74,5 +81,6 @@ export function useAuth() {
     signIn,
     signOut,
     resetPassword,
+    updatePassword,
   }
 }

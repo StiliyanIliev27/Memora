@@ -1,36 +1,67 @@
 'use client'
 
-import { useState } from 'react'
-import { useAuthContext } from '@/stores/AuthContext'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { supabase } from '@/lib/supabase'
-import { ArrowLeft, Mail, CheckCircle, AlertCircle } from 'lucide-react'
-import InteractiveMap from '@/components/3d/InteractiveMap'
+import { Card, CardContent } from '@/components/ui/card'
+import { useAuthContext } from '@/stores/AuthContext'
 import Link from 'next/link'
-import { MapPin, Globe, Heart, Users, Sparkles, Navigation, Plane, Camera } from 'lucide-react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { MapPin, Globe, Heart, Users, Sparkles, Navigation, Plane, Camera, Lock, Eye, EyeOff, ArrowLeft, CheckCircle } from 'lucide-react'
+import InteractiveMap from '@/components/3d/InteractiveMap'
 import { toast } from 'sonner'
 
-export default function ForgotPasswordPage() {
-  const [email, setEmail] = useState('')
+export default function ResetPasswordPage() {
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const { updatePassword } = useAuthContext()
 
-  const { resetPassword } = useAuthContext()
+  // Get access token from URL parameters
+  const accessToken = searchParams.get('access_token')
+  const refreshToken = searchParams.get('refresh_token')
+
+  useEffect(() => {
+    // Check if we have the required tokens
+    if (!accessToken || !refreshToken) {
+      toast.error('Invalid or expired reset link. Please request a new password reset.')
+    }
+  }, [accessToken, refreshToken])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
 
+    // Validate passwords
+    if (password.length < 6) {
+      toast.error('Password must be at least 6 characters long')
+      setLoading(false)
+      return
+    }
+
+    if (password !== confirmPassword) {
+      toast.error('Passwords do not match')
+      setLoading(false)
+      return
+    }
+
     try {
-      const { error } = await resetPassword(email)
+      const { error } = await updatePassword(password)
       
       if (error) {
         toast.error(error.message)
       } else {
-        toast.success('Check your email for the password reset link!')
-        setEmail('')
+        toast.success('Password updated successfully! Redirecting to sign in...')
+        // Redirect to sign in after 2 seconds
+        setTimeout(() => {
+          router.push('/signin')
+        }, 2000)
       }
     } catch (err) {
       toast.error('An unexpected error occurred')
@@ -38,6 +69,19 @@ export default function ForgotPasswordPage() {
       setLoading(false)
     }
   }
+
+  const validatePassword = (password: string) => {
+    const checks = {
+      length: password.length >= 6,
+      uppercase: /[A-Z]/.test(password),
+      lowercase: /[a-z]/.test(password),
+      number: /\d/.test(password),
+      special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
+    }
+    return checks
+  }
+
+  const passwordChecks = validatePassword(password)
 
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
@@ -90,12 +134,12 @@ export default function ForgotPasswordPage() {
               <div className="absolute bottom-4 left-4 z-20">
                 <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-xl border border-white/20">
                   <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                      <Mail className="h-4 w-4 text-white" />
+                    <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
+                      <Lock className="h-4 w-4 text-white" />
                     </div>
                     <div>
-                      <div className="text-sm font-semibold text-gray-900">Secure Reset</div>
-                      <div className="text-lg font-bold text-blue-600">100% Safe</div>
+                      <div className="text-sm font-semibold text-gray-900">Secure Update</div>
+                      <div className="text-lg font-bold text-green-600">Protected</div>
                     </div>
                   </div>
                 </div>
@@ -110,7 +154,7 @@ export default function ForgotPasswordPage() {
               </div>
             </div>
             
-            {/* Right Column - Forgot Password Form (40%) */}
+            {/* Right Column - Reset Password Form (40%) */}
             <div className="w-full lg:w-2/5 flex items-center justify-center p-8">
               <div className="w-full max-w-md">
                 <div className="text-center mb-8">
@@ -124,59 +168,115 @@ export default function ForgotPasswordPage() {
                   {/* Enhanced Main Headline */}
                   <h1 className="text-3xl font-bold text-gray-900 mb-3">
                     <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-                      Reset Password
+                      Set New Password
                     </span>
                   </h1>
                   <p className="text-gray-600">
-                    Enter your email to receive a secure reset link
+                    Create a strong password to secure your account
                   </p>
                   
                   {/* Interactive Features Preview */}
                   <div className="mt-6 flex justify-center space-x-4">
                     <div className="flex items-center space-x-2 text-sm text-gray-500">
                       <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                      <span>Secure Reset</span>
+                      <span>Secure Password</span>
                     </div>
                     <div className="flex items-center space-x-2 text-sm text-gray-500">
                       <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                      <span>Email Link</span>
+                      <span>Account Protected</span>
                     </div>
                   </div>
                 </div>
                 
-                {/* Forgot Password Form */}
+                {/* Reset Password Form */}
                 <Card className="border-0 shadow-none bg-transparent">
                   <CardContent className="p-0">
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div className="space-y-2">
-                        <Label htmlFor="email" className="text-sm font-medium text-gray-700">
-                          Email Address
+                        <Label htmlFor="password" className="text-sm font-medium text-gray-700">
+                          New Password
                         </Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="Enter your email address"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white/80 backdrop-blur-sm"
-                          required
-                        />
+                        <div className="relative">
+                          <Input
+                            id="password"
+                            type={showPassword ? "text" : "password"}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Enter your new password"
+                            className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white/80 backdrop-blur-sm"
+                            required
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                          >
+                            {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                          </button>
+                        </div>
+                        
+                        {/* Password Strength Indicator */}
+                        {password && (
+                          <div className="mt-3 space-y-2">
+                            <div className="text-xs font-medium text-gray-600">Password strength:</div>
+                            <div className="space-y-1">
+                              {[
+                                { key: 'length', label: 'At least 6 characters', check: passwordChecks.length },
+                                { key: 'uppercase', label: 'One uppercase letter', check: passwordChecks.uppercase },
+                                { key: 'lowercase', label: 'One lowercase letter', check: passwordChecks.lowercase },
+                                { key: 'number', label: 'One number', check: passwordChecks.number },
+                                { key: 'special', label: 'One special character', check: passwordChecks.special }
+                              ].map(({ key, label, check }) => (
+                                <div key={key} className="flex items-center space-x-2">
+                                  <CheckCircle className={`h-3 w-3 ${check ? 'text-green-500' : 'text-gray-300'}`} />
+                                  <span className={`text-xs ${check ? 'text-green-600' : 'text-gray-500'}`}>
+                                    {label}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="confirmPassword" className="text-sm font-medium text-gray-700">
+                          Confirm Password
+                        </Label>
+                        <div className="relative">
+                          <Input
+                            id="confirmPassword"
+                            type={showConfirmPassword ? "text" : "password"}
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            placeholder="Confirm your new password"
+                            className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white/80 backdrop-blur-sm"
+                            required
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                          >
+                            {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                          </button>
+                        </div>
                       </div>
 
                       <Button 
                         type="submit" 
                         className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105" 
-                        disabled={loading}
+                        disabled={loading || !accessToken || !refreshToken}
                       >
                         {loading ? (
                           <div className="flex items-center space-x-2">
                             <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                            <span>Sending Reset Link...</span>
+                            <span>Updating Password...</span>
                           </div>
                         ) : (
                           <div className="flex items-center space-x-2">
-                            <Mail className="h-4 w-4" />
-                            <span>Send Reset Link</span>
+                            <Lock className="h-4 w-4" />
+                            <span>Update Password</span>
                           </div>
                         )}
                       </Button>

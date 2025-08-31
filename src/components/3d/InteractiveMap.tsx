@@ -16,10 +16,30 @@ interface MemoryMarker {
   animationDelay: number
 }
 
+// Convert lat/lng to 3D coordinates on a sphere and offset above surface
+function latLngToPosition(lat: number, lng: number, radius: number = 3): [number, number, number] {
+  const phi = (90 - lat) * (Math.PI / 180)
+  const theta = (lng + 180) * (Math.PI / 180)
+  
+  const x = -(radius * Math.sin(phi) * Math.cos(theta))
+  const z = (radius * Math.sin(phi) * Math.sin(theta))
+  const y = (radius * Math.cos(phi))
+  
+  // Calculate the normalized direction vector from center to surface
+  const length = Math.sqrt(x * x + y * y + z * z)
+  const dirX = x / length
+  const dirY = y / length
+  const dirZ = z / length
+  
+  // Offset the position above the surface by 0.3 units
+  const offset = 0.3
+  return [x + dirX * offset, y + dirY * offset, z + dirZ * offset]
+}
+
 const markers: MemoryMarker[] = [
   {
     id: 'paris',
-    position: [2.2, 1.8, 1.2], // Europe - France
+    position: latLngToPosition(48.8566, 2.3522), // Paris, France
     icon: 'heart',
     color: '#ef4444',
     location: 'Paris, France',
@@ -28,7 +48,7 @@ const markers: MemoryMarker[] = [
   },
   {
     id: 'tokyo',
-    position: [2.8, 1.0, -1.5], // Asia - Japan
+    position: latLngToPosition(35.6762, 139.6503), // Tokyo, Japan
     icon: 'users',
     color: '#3b82f6',
     location: 'Tokyo, Japan',
@@ -37,12 +57,30 @@ const markers: MemoryMarker[] = [
   },
   {
     id: 'newyork',
-    position: [-2.5, 1.5, -1.0], // North America - USA
+    position: latLngToPosition(40.7128, -74.0060), // New York, USA
     icon: 'mappin',
     color: '#8b5cf6',
     location: 'New York, USA',
     description: 'Business trip memories',
     animationDelay: 2
+  },
+  {
+    id: 'sydney',
+    position: latLngToPosition(-33.8688, 151.2093), // Sydney, Australia
+    icon: 'heart',
+    color: '#10b981',
+    location: 'Sydney, Australia',
+    description: 'Beach vacation',
+    animationDelay: 3
+  },
+  {
+    id: 'rio',
+    position: latLngToPosition(-22.9068, -43.1729), // Rio de Janeiro, Brazil
+    icon: 'users',
+    color: '#f59e0b',
+    location: 'Rio de Janeiro, Brazil',
+    description: 'Carnival memories',
+    animationDelay: 4
   }
 ]
 
@@ -54,26 +92,24 @@ function FloatingMarker({ marker }: { marker: MemoryMarker }) {
   useFrame((state) => {
     if (meshRef.current) {
       const time = state.clock.getElapsedTime() + marker.animationDelay
-      // More bouncy and playful animation
-      meshRef.current.position.y = marker.position[1] + Math.sin(time * 3) * 0.2
-      meshRef.current.rotation.y = time * 0.8
-      meshRef.current.rotation.z = Math.sin(time * 2) * 0.1
-      // Add a gentle scale animation
-      const scale = 1 + Math.sin(time * 4) * 0.1
-      meshRef.current.scale.set(scale, scale, scale)
+      // Much more subtle and static animation
+      meshRef.current.position.y = marker.position[1] + Math.sin(time * 1) * 0.05
+      meshRef.current.rotation.y = time * 0.2
+      // Remove the bouncy scale animation
+      meshRef.current.scale.set(1, 1, 1)
     }
   })
 
   const getIcon = () => {
     switch (marker.icon) {
       case 'heart':
-        return <Heart className="h-4 w-4 text-white" />
+        return <Heart className="h-3 w-3 text-white" />
       case 'users':
-        return <Users className="h-4 w-4 text-white" />
+        return <Users className="h-3 w-3 text-white" />
       case 'mappin':
-        return <MapPin className="h-4 w-4 text-white" />
+        return <MapPin className="h-3 w-3 text-white" />
       default:
-        return <MapPin className="h-4 w-4 text-white" />
+        return <MapPin className="h-3 w-3 text-white" />
     }
   }
 
@@ -90,53 +126,53 @@ function FloatingMarker({ marker }: { marker: MemoryMarker }) {
         setShowTooltip(false)
       }}
     >
-      <Sphere args={[0.15, 16, 16]}>
+      <Sphere args={[0.12, 16, 16]}>
         <meshStandardMaterial 
           color={marker.color} 
           emissive={marker.color}
-          emissiveIntensity={hovered ? 0.5 : 0.2}
+          emissiveIntensity={hovered ? 0.3 : 0.1}
           metalness={0.9}
           roughness={0.1}
         />
       </Sphere>
       
-      {/* Add a glowing ring around the marker */}
-      <Sphere args={[0.2, 16, 16]}>
+      {/* Smaller glowing ring around the marker */}
+      <Sphere args={[0.16, 16, 16]}>
         <meshStandardMaterial 
           color={marker.color}
           transparent
-          opacity={hovered ? 0.3 : 0.1}
+          opacity={hovered ? 0.2 : 0.05}
           emissive={marker.color}
-          emissiveIntensity={0.2}
+          emissiveIntensity={0.1}
         />
       </Sphere>
       
       <Html
-        position={[0, 0.4, 0]}
+        position={[0, 0.3, 0]}
         center
-        distanceFactor={8}
+        distanceFactor={12}
         style={{
           pointerEvents: 'none',
           opacity: showTooltip ? 1 : 0,
           transition: 'opacity 0.3s ease',
-          transform: showTooltip ? 'scale(1.1)' : 'scale(1)',
+          transform: showTooltip ? 'scale(1)' : 'scale(0.9)',
         }}
       >
-        <div className="bg-white px-3 py-2 rounded-xl shadow-xl text-sm whitespace-nowrap border-2 border-gray-200 bg-gradient-to-r from-white to-gray-50">
-          <div className="font-bold text-gray-900">{marker.location}</div>
-          <div className="text-gray-600">{marker.description}</div>
+        <div className="bg-white px-2 py-1 rounded-lg shadow-lg text-xs whitespace-nowrap border border-gray-200 bg-gradient-to-r from-white to-gray-50">
+          <div className="font-semibold text-gray-900 text-xs">{marker.location}</div>
+          <div className="text-gray-600 text-xs">{marker.description}</div>
         </div>
       </Html>
 
       <Html
         position={[0, 0, 0]}
         center
-        distanceFactor={8}
+        distanceFactor={12}
         style={{
           pointerEvents: 'none',
         }}
       >
-        <div className="flex items-center justify-center w-6 h-6">
+        <div className="flex items-center justify-center w-5 h-5">
           {getIcon()}
         </div>
       </Html>
@@ -222,11 +258,9 @@ function Scene() {
 
   return (
     <>
-      {/* High-quality lighting like earth3dmap.com */}
-      <ambientLight intensity={0.9} color="#FFFFFF" />
-      <directionalLight position={[10, 10, 5]} intensity={1.5} color="#FFFFFF" />
-      <directionalLight position={[-10, -10, -5]} intensity={0.3} color="#87CEEB" />
-      <pointLight position={[0, 10, 0]} intensity={0.2} color="#FFFFFF" />
+      {/* Enhanced lighting for dark background */}
+      <ambientLight intensity={3} color="#FFFFFF" />
+      <pointLight position={[0, 10, 0]} intensity={0.3} color="#FFFFFF" />
       
       <CartoonEarth />
       
@@ -248,6 +282,12 @@ function Scene() {
 export default function InteractiveMap() {
   return (
     <div className="w-full h-full relative">
+      {/* Enhanced background gradient matching auth page design */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.15)_0%,transparent_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(147,51,234,0.15)_0%,transparent_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(236,72,153,0.1)_0%,transparent_50%)]"></div>
+      
       <Canvas
         camera={{ position: [0, 0, 8], fov: 60 }}
         style={{ background: 'transparent' }}

@@ -56,6 +56,7 @@ export type Database = {
           user2_id: string
           connection_type: 'couple' | 'friend' | 'group'
           status: 'pending' | 'accepted' | 'rejected'
+          message?: string
           created_at: string
           updated_at: string
         }
@@ -65,6 +66,7 @@ export type Database = {
           user2_id: string
           connection_type: 'couple' | 'friend' | 'group'
           status?: 'pending' | 'accepted' | 'rejected'
+          message?: string
           created_at?: string
           updated_at?: string
         }
@@ -74,6 +76,7 @@ export type Database = {
           user2_id?: string
           connection_type?: 'couple' | 'friend' | 'group'
           status?: 'pending' | 'accepted' | 'rejected'
+          message?: string
           created_at?: string
           updated_at?: string
         }

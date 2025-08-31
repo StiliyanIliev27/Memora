@@ -7,13 +7,12 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useAuthContext } from '@/stores/AuthContext'
+import { toast } from 'sonner'
 
 export function SignInForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -29,23 +28,21 @@ export function SignInForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    setError('')
-    setSuccess('')
 
     try {
       const { data, error } = await signIn(email, password)
       
       if (error) {
-        setError(error.message)
+        toast.error(error.message)
       } else {
-        setSuccess('Sign in successful! Redirecting...')
+        toast.success('Sign in successful! Redirecting...')
         setTimeout(() => {
           const redirectTo = searchParams.get('redirectTo') || '/'
           router.push(redirectTo)
         }, 1500)
       }
     } catch (err) {
-      setError('An unexpected error occurred. Please check your internet connection and try again.')
+      toast.error('An unexpected error occurred. Please check your internet connection and try again.')
     } finally {
       setLoading(false)
     }
@@ -78,18 +75,6 @@ export function SignInForm() {
               required
             />
           </div>
-
-          {error && (
-            <div className="text-sm text-red-600 bg-red-50 p-3 rounded-md">
-              {error}
-            </div>
-          )}
-
-          {success && (
-            <div className="text-sm text-green-600 bg-green-50 p-3 rounded-md">
-              {success}
-            </div>
-          )}
 
           <Button type="submit" className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700" disabled={loading}>
             {loading ? 'Signing In...' : 'Sign In'}

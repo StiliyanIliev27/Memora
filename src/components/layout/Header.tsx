@@ -48,24 +48,9 @@ export function Header() {
         {/* Navigation - Only show if user is authenticated */}
         {user && (
           <nav className="hidden md:flex items-center space-x-4">
-            <Link href="/map">
-              <Button variant="ghost" className="text-foreground/60 hover:text-foreground hover:bg-blue-50">
-                <MapPin className="h-4 w-4 mr-2" />
-                Map
-              </Button>
-            </Link>
-            <Link href="/memories">
-              <Button variant="ghost" className="text-foreground/60 hover:text-foreground hover:bg-purple-50">
-                <Heart className="h-4 w-4 mr-2" />
-                Memories
-              </Button>
-            </Link>
-            <Link href="/connections">
-              <Button variant="ghost" className="text-foreground/60 hover:text-foreground hover:bg-green-50">
-                <Users className="h-4 w-4 mr-2" />
-                Connections
-              </Button>
-            </Link>
+
+
+
           </nav>
         )}
 
@@ -73,12 +58,8 @@ export function Header() {
         <div className="flex items-center space-x-4">
           {user ? (
             <>
-              <Link href="/add-memory">
-                <Button variant="outline" size="sm" className="bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 hover:from-blue-600 hover:to-purple-600">
-                  <Plus className="h-4 w-4 mr-2" />
-                  Add Memory
-                </Button>
-              </Link>
+              
+
               
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -92,16 +73,8 @@ export function Header() {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56" align="end" forceMount>
-                  <Link href="/profile">
-                    <DropdownMenuItem>
-                      Profile
-                    </DropdownMenuItem>
-                  </Link>
-                  <Link href="/settings">
-                    <DropdownMenuItem>
-                      Settings
-                    </DropdownMenuItem>
-                  </Link>
+
+
                   <DropdownMenuSeparator />
                   <DropdownMenuItem className="text-red-600" onClick={handleSignOut}>
                     Sign out
