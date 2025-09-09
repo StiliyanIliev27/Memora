@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -12,7 +12,7 @@ import { MapPin, Globe, Heart, Users, Sparkles, Navigation, Plane, Camera, Lock,
 import InteractiveMap from '@/components/3d/InteractiveMap'
 import { toast } from 'sonner'
 
-export default function ResetPasswordPage() {
+function ResetPasswordContent() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -300,5 +300,13 @@ export default function ResetPasswordPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
+      <ResetPasswordContent />
+    </Suspense>
   )
 }
