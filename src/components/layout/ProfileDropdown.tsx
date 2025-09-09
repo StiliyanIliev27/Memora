@@ -13,12 +13,10 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { User, Settings, LogOut } from 'lucide-react'
 import { ProfileModal } from '@/components/user/ProfileModal'
-import { SettingsModal } from '@/components/user/SettingsModal'
 
 export function ProfileDropdown() {
   const { user, signOut } = useAuthContext()
   const [showProfile, setShowProfile] = useState(false)
-  const [showSettings, setShowSettings] = useState(false)
 
   const handleSignOut = async () => {
     await signOut()
@@ -44,10 +42,6 @@ export function ProfileDropdown() {
             <User className="mr-2 h-4 w-4" />
             <span>My Profile</span>
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setShowSettings(true)} className="cursor-pointer">
-            <Settings className="mr-2 h-4 w-4" />
-            <span>Settings</span>
-          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-red-600 focus:text-red-600">
             <LogOut className="mr-2 h-4 w-4" />
@@ -61,13 +55,6 @@ export function ProfileDropdown() {
         <ProfileModal
           isOpen={showProfile}
           onClose={() => setShowProfile(false)}
-        />
-      )}
-
-      {showSettings && (
-        <SettingsModal
-          isOpen={showSettings}
-          onClose={() => setShowSettings(false)}
         />
       )}
     </>
