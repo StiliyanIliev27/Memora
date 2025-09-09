@@ -119,13 +119,13 @@ Memora is an interactive world map where people can save and share their memorie
 - [ ] Accessibility improvements
 - [ ] Performance optimizations
 
-### Phase 11: Testing & Quality Assurance
-- [ ] Unit tests for core functionality
-- [ ] Integration tests for user flows
-- [ ] End-to-end testing
-- [ ] Performance testing
-- [ ] Security testing
-- [ ] Cross-browser compatibility testing
+### Phase 11: Testing & Quality Assurance (deferred)
+- [x] Unit tests for core functionality (basic coverage in place)
+- [ ] Integration tests for user flows (deferred)
+- [ ] End-to-end testing (deferred)
+- [ ] Performance testing (deferred)
+- [ ] Security testing (deferred)
+- [ ] Cross-browser compatibility testing (deferred)
 
 ### Phase 12: Deployment & Launch
 - [ ] Set up production Supabase environment
@@ -181,8 +181,8 @@ Memora is an interactive world map where people can save and share their memorie
 
 ## Current Status
 
-**Phase**: Phase 10 Complete ✅
-**Next Steps**: Phase 11 - Testing & Quality Assurance
+**Phase**: Phase 12 - Deployment & Launch (in progress)
+**Next Steps**: Set up production Supabase and Vercel, configure monitoring, finalize docs, run smoke tests, launch
 
 **Key Achievements:**
 - ✅ Immersive full-screen map interface
@@ -196,6 +196,10 @@ Memora is an interactive world map where people can save and share their memorie
 - ✅ Connection details and shared memories
 - ✅ Professional UI/UX with toast notifications
 - ✅ Reusable components and improved spacing
+ - ✅ Test framework set up (Jest + RTL) and initial unit tests added:
+   - `locationService` core behaviors
+   - UI components: Button, Dialog, DeleteConfirmationModal
+   - FloatingNavigation tests in progress
 
 ---
 

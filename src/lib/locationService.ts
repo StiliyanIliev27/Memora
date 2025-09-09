@@ -146,6 +146,16 @@ export const locationService = {
         `limit=1`
 
       let response = await fetch(url)
+      if (!response.ok) {
+        const errorText = await response.text()
+        if (response.status === 422) {
+          throw new Error(`Invalid coordinates: ${formattedLat}, ${formattedLng}. Please try a different location.`)
+        } else if (response.status === 401) {
+          throw new Error('Invalid Mapbox token. Please check your configuration.')
+        } else {
+          throw new Error(`Mapbox API error: ${response.status} ${response.statusText}`)
+        }
+      }
       let data = await response.json()
 
       // If no POI found, try address
@@ -157,6 +167,16 @@ export const locationService = {
           `limit=1`
         
         response = await fetch(url)
+        if (!response.ok) {
+          const errorText = await response.text()
+          if (response.status === 422) {
+            throw new Error(`Invalid coordinates: ${formattedLat}, ${formattedLng}. Please try a different location.`)
+          } else if (response.status === 401) {
+            throw new Error('Invalid Mapbox token. Please check your configuration.')
+          } else {
+            throw new Error(`Mapbox API error: ${response.status} ${response.statusText}`)
+          }
+        }
         data = await response.json()
       }
 
@@ -169,21 +189,20 @@ export const locationService = {
           `limit=1`
         
         response = await fetch(url)
+        if (!response.ok) {
+          const errorText = await response.text()
+          if (response.status === 422) {
+            throw new Error(`Invalid coordinates: ${formattedLat}, ${formattedLng}. Please try a different location.`)
+          } else if (response.status === 401) {
+            throw new Error('Invalid Mapbox token. Please check your configuration.')
+          } else {
+            throw new Error(`Mapbox API error: ${response.status} ${response.statusText}`)
+          }
+        }
         data = await response.json()
       }
 
-      if (!response.ok) {
-        const errorText = await response.text()
-        
-        // Handle specific error cases
-        if (response.status === 422) {
-          throw new Error(`Invalid coordinates: ${formattedLat}, ${formattedLng}. Please try a different location.`)
-        } else if (response.status === 401) {
-          throw new Error('Invalid Mapbox token. Please check your configuration.')
-        } else {
-          throw new Error(`Mapbox API error: ${response.status} ${response.statusText}`)
-        }
-      }
+      
 
       if (!data.features || data.features.length === 0) {
         return null

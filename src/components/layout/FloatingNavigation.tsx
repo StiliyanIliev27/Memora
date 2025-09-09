@@ -16,6 +16,8 @@ import { ConnectionModal } from '@/components/connections/ConnectionModal'
 import { supabase } from '@/lib/supabase'
 import { toast } from 'sonner'
 
+
+
 const RELATIONSHIP_ICONS = {
   couple: { icon: Heart, color: 'text-red-500', bgColor: 'bg-red-50' },
   friend: { icon: Star, color: 'text-yellow-500', bgColor: 'bg-yellow-50' },
@@ -41,17 +43,6 @@ export function FloatingNavigation({ selectedLocation, selectedLocationDetails, 
   const [showConnectionModal, setShowConnectionModal] = useState(false)
   const [selectedConnection, setSelectedConnection] = useState<ConnectionWithUsers | null>(null)
   const [updating, setUpdating] = useState<string | null>(null)
-
-  useEffect(() => {
-    loadConnections()
-    const cleanup = setupRealtimeSubscription()
-    
-    return () => {
-      if (cleanup) {
-        cleanup()
-      }
-    }
-  }, [user]) // Added user to dependency array
 
   useEffect(() => {
     loadConnections()
@@ -174,9 +165,9 @@ export function FloatingNavigation({ selectedLocation, selectedLocationDetails, 
 
   return (
     <>
-      <div className="w-80 bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/20">
+      <div className="w-80 bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border" style={{ borderWidth: '0px' }}>
         {/* App Logo and Name */}
-        <div className="p-6 border-b border-gray-100">
+        <div className="p-6 border-b border-gray-100 bg-white/95 rounded-t-2xl">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
               <MapPin className="h-6 w-6 text-white" />
