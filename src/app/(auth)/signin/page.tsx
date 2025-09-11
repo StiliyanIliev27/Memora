@@ -3,6 +3,7 @@ import { useAuthContext } from '@/stores/AuthContext'
 import InteractiveMap from '@/components/3d/InteractiveMap'
 import Link from 'next/link'
 import { MapPin, Globe, Heart, Users, Sparkles, Navigation, Plane, Camera } from 'lucide-react'
+import { Suspense } from 'react'
 
 export default function SignInPage() {
   return (
@@ -111,7 +112,9 @@ export default function SignInPage() {
                 </div>
                 
                 {/* Sign In Form */}
-                <SignInForm />
+                <Suspense fallback={<div className="text-center">Loading...</div>}>
+                  <SignInForm />
+                </Suspense>
                 
                 {/* Enhanced Sign Up Link */}
                 <div className="text-center mt-6">
